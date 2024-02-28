@@ -17,15 +17,60 @@ function HiveSettingsBasic(Player, IndexPlatform) -- Косание локал(�
 
 end
 
-function CheckButton(Player, IndexPlatform) -- Кнопка(локал)
+function CheckButton(Player, IndexPlatform, AllHive) -- Кнопка(локал)
     task.spawn(function()
         while true do
             task.wait()
-            if  IndexPlatform.Owner.Value ~= "" then
-                IndexPlatform.Platform.Up.Indecator.Button.Enabled = true
+            --print(IndexPlatform.Owner.Value)
+            
+            if AllHive.Hive1.Owner.Value ~= "" then
+                AllHive.Hive1.Platform.Up.Indecator.Button.Enabled = true
             else
-                IndexPlatform.Platform.Up.Indecator.Button.Enabled = false
+                AllHive.Hive1.Platform.Up.Indecator.Button.Enabled = false
             end
+
+            if AllHive.Hive2.Owner.Value ~= "" then
+                AllHive.Hive2.Platform.Up.Indecator.Button.Enabled = true
+            else
+                AllHive.Hive2.Platform.Up.Indecator.Button.Enabled = false
+            end
+            
+            if AllHive.Hive3.Owner.Value ~= "" then
+                AllHive.Hive3.Platform.Up.Indecator.Button.Enabled = true
+            else
+                AllHive.Hive3.Platform.Up.Indecator.Button.Enabled= false
+            end
+
+            if AllHive.Hive4.Owner.Value ~= "" then
+                AllHive.Hive4.Platform.Up.Indecator.Button.Enabled = true
+            else
+                AllHive.Hive4.Platform.Up.Indecator.Button.Enabled = false
+            end
+
+            if AllHive.Hive5.Owner.Value ~= "" then
+                AllHive.Hive5.Platform.Up.Indecator.Button.Enabled = true
+            else
+                AllHive.Hive5.Platform.Up.Indecator.Button.Enabled = false
+            end
+
+            if AllHive.Hive6.Owner.Value ~= "" then
+                AllHive.Hive6.Platform.Up.Indecator.Button.Enabled = true
+            else
+                AllHive.Hive6.Platform.Up.Indecator.Button.Enabled = false
+            end
+
+            if AllHive.Hive7.Owner.Value ~= "" then
+                AllHive.Hive7.Platform.Up.Indecator.Button.Enabled = true
+            else
+                AllHive.Hive7.Platform.Up.Indecator.Button.Enabled = false
+            end
+
+            if AllHive.Hive8.Owner.Value ~= "" then
+                AllHive.Hive8.Platform.Up.Indecator.Button.Enabled = true
+            else
+                AllHive.Hive8.Platform.Up.Indecator.Button.Enabled = false
+            end
+
         end
     end)
 end
