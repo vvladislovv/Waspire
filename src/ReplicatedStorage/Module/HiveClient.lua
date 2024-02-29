@@ -26,6 +26,7 @@ end
 
 function HiveAndSlot(IndexHive)
     local NumerSlot = 1
+    local SlotNumber = 1
     IndexHive.Material = Enum.Material.Neon
     print(IndexHive.Material)
     TweenService:Create(IndexHive, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, 0, true), {Color = Color3.fromRGB(255, 255, 255)}):Play()
@@ -33,11 +34,11 @@ function HiveAndSlot(IndexHive)
     local function SlotSpawnHive()
 
         local TweenInfoSlot = TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut)
-
+        
         if IndexHive.Name == "Hive1" then
             local SlotHive = IndexHive.SlotHive
             --local SlotFolder = #SlotHive:GetChildren()
-            local SlotNumber = 1
+            
             --print(SlotFolder)
             for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
                 if _G.PData.Hive.Slot >= SlotNumber then
@@ -49,12 +50,12 @@ function HiveAndSlot(IndexHive)
                 task.wait(0.05)
                 
                 TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                --SlotNumber += 1
+                SlotNumber += 1
             end
         elseif IndexHive.Name == "Hive2" then
             local SlotHive = IndexHive.SlotHive
             --local SlotFolder = #SlotHive:GetChildren()
-            local SlotNumber = 1
+            
             --print(SlotFolder)
             for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
                 if _G.PData.Hive.Slot >= SlotNumber then
@@ -66,12 +67,12 @@ function HiveAndSlot(IndexHive)
                 task.wait(0.05)
                 
                 TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                --SlotNumber += 1
+                SlotNumber += 1
             end
         elseif IndexHive.Name == "Hive3" then
             local SlotHive = IndexHive.SlotHive
             --local SlotFolder = #SlotHive:GetChildren()
-            local SlotNumber = 1
+            
             --print(SlotFolder)
             for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
                 if _G.PData.Hive.Slot >= SlotNumber then
@@ -83,12 +84,12 @@ function HiveAndSlot(IndexHive)
                 task.wait(0.05)
                 
                 TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                --SlotNumber += 1
+                SlotNumber += 1
             end
         elseif IndexHive.Name == "Hive4" then --Orientation 0, 178.6, 90
             local SlotHive = IndexHive.SlotHive
             --local SlotFolder = #SlotHive:GetChildren()
-            local SlotNumber = 1
+            
             --print(SlotFolder)
             for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
                 if _G.PData.Hive.Slot >= SlotNumber then
@@ -100,13 +101,13 @@ function HiveAndSlot(IndexHive)
                 task.wait(0.05)
                 
                 TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                --SlotNumber += 1
+                SlotNumber += 1
             end
            
         elseif IndexHive.Name == "Hive5" then
             local SlotHive = IndexHive.SlotHive
             --local SlotFolder = #SlotHive:GetChildren()
-            local SlotNumber = 1
+            
             --print(SlotFolder)
             for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
                 if _G.PData.Hive.Slot >= SlotNumber then
@@ -118,12 +119,12 @@ function HiveAndSlot(IndexHive)
                 task.wait(0.05)
                 
                 TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                --SlotNumber += 1
+                SlotNumber += 1
             end
         elseif IndexHive.Name == "Hive6" then
             local SlotHive = IndexHive.SlotHive
             --local SlotFolder = #SlotHive:GetChildren()
-            local SlotNumber = 1
+            
             --print(SlotFolder)
             for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
                 if _G.PData.Hive.Slot >= SlotNumber then
@@ -135,12 +136,12 @@ function HiveAndSlot(IndexHive)
                 task.wait(0.05)
                 
                 TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                --SlotNumber += 1
+                SlotNumber += 1
             end
         elseif IndexHive.Name == "Hive7" then
             local SlotHive = IndexHive.SlotHive
             --local SlotFolder = #SlotHive:GetChildren()
-            local SlotNumber = 1
+            
             --print(SlotFolder)
             for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
                 if _G.PData.Hive.Slot >= SlotNumber then
@@ -152,12 +153,12 @@ function HiveAndSlot(IndexHive)
                 task.wait(0.05)
                 
                 TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                --SlotNumber += 1
+                SlotNumber += 1
             end
         elseif IndexHive.Name == "Hive8" then
             local SlotHive = IndexHive.SlotHive
             --local SlotFolder = #SlotHive:GetChildren()
-            local SlotNumber = 1
+            
             --print(SlotFolder)
             for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
                 if _G.PData.Hive.Slot >= SlotNumber then
@@ -169,7 +170,7 @@ function HiveAndSlot(IndexHive)
                 task.wait(0.05)
                 
                 TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                --SlotNumber += 1
+                SlotNumber += 1
             end
         end
     end
