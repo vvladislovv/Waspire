@@ -20,7 +20,7 @@ end
 function BeanCheckGame()
     local HiveFolder = workspace.Hive
 
-    local function CheckHive(Char)
+    local function CheckHive(Char) -- переписать на склиент
         --for _, AllHive in next, HiveFolder:GetChildren() do
             if HiveFolder.Hive1.Owner.Value == "" then
                 Char.UpperTorso.Beam1.Enabled = true
@@ -82,7 +82,7 @@ function BeanCheckGame()
     end)
 end
 
-function CheckButton(Player, IndexPlatform, AllHive) -- Кнопка(локал)
+function CheckButton(Player, IndexPlatform, AllHive) -- переписать на склиент
     task.spawn(function()
         while true do
             task.wait()

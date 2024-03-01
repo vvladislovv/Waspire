@@ -24,11 +24,17 @@ function ButtonDistation(Distation, Button, IndexPlatform)
     end
 end
 
+
+function NewSlotsHiver(IndexHive)
+    local AllSlot = IndexHive[_G.PData.Fake]
+end
+
 function HiveAndSlot(IndexHive)
-    local NumerSlot = 1
-    local SlotNumber = 1
+    local NumerSlot = 0
+    local SlotNumber = 0
+    SlotNumber = _G.PData.Hive.Slot
     IndexHive.Material = Enum.Material.Neon
-    print(IndexHive.Material)
+    --print(IndexHive.Material)
     TweenService:Create(IndexHive, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, 0, true), {Color = Color3.fromRGB(255, 255, 255)}):Play()
     IndexHive.Material = Enum.Material.SmoothPlastic
     local function SlotSpawnHive()
@@ -36,22 +42,26 @@ function HiveAndSlot(IndexHive)
         local TweenInfoSlot = TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut)
         
         if IndexHive.Name == "Hive1" then
-            local SlotHive = IndexHive.SlotHive
-            --local SlotFolder = #SlotHive:GetChildren()
-            
-            --print(SlotFolder)
-            for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
-                if _G.PData.Hive.Slot >= SlotNumber then
+
+            for _, i in next, IndexHive.SlotHive:GetChildren() do -- Check Slot AllHive
+                NumerSlot += 1
+            end
+
+            local MaxSlot = math.max(NumerSlot) -- max slot
+
+                if _G.PData.Hive.Slot then
+                    print(_G.PData.Hive.Slot)
+                    if SlotNumber == 35 then
+                        TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
+                    end
+                    print(SlotNumber)
                     TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
                 else -- дописать
                     TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
                     SlotNumber += 1
                 end
-                task.wait(0.05)
                 
-                TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                SlotNumber += 1
-            end
+
         elseif IndexHive.Name == "Hive2" then
             local SlotHive = IndexHive.SlotHive
             --local SlotFolder = #SlotHive:GetChildren()
