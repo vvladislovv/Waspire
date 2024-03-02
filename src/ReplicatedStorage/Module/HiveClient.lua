@@ -13,178 +13,86 @@ _G.PData = Remote.GetDataSave:InvokeServer()
 
 local HiveCleint = {}
 
-function ButtonDistation(Distation, Button, IndexPlatform)
+function ButtonDistation(Distation, Button, IndexHive)
 
     if Distation < 10 then
         TweenModule:SizeBasicButtonOpen(Button)
-        NewHive(IndexPlatform)
+        NewHive(IndexHive)
+        --print('aa')
     elseif Distation > 10 then
-
         TweenModule:SizeBasicButtonClose(Button)
     end
-end
 
-
-function NewSlotsHiver(IndexHive)
-    local AllSlot = IndexHive[_G.PData.Fake]
-end
-
-function HiveAndSlot(IndexHive)
-    local NumerSlot = 0
-    local SlotNumber = 0
-    SlotNumber = _G.PData.Hive.Slot
-    IndexHive.Material = Enum.Material.Neon
-    --print(IndexHive.Material)
-    TweenService:Create(IndexHive, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, 0, true), {Color = Color3.fromRGB(255, 255, 255)}):Play()
-    IndexHive.Material = Enum.Material.SmoothPlastic
-    local function SlotSpawnHive()
-
-        local TweenInfoSlot = TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut)
-        
-        if IndexHive.Name == "Hive1" then
-
-            for _, i in next, IndexHive.SlotHive:GetChildren() do -- Check Slot AllHive
-                NumerSlot += 1
+    if IndexHive.Owner.Value ~= "" then
+        if IndexHive.Owner.Value == Player.Name then
+            if Distation < 10 then
+                TweenModule:SizeBasicButtonOpen(Button)
+            elseif Distation > 10 then
+                TweenModule:SizeBasicButtonClose(Button)
             end
-
-            local MaxSlot = math.max(NumerSlot) -- max slot
-
-                if _G.PData.Hive.Slot then
-                    print(_G.PData.Hive.Slot)
-                    if SlotNumber == 35 then
-                        TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                    end
-                    print(SlotNumber)
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                else -- дописать
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                    SlotNumber += 1
-                end
-                
-
-        elseif IndexHive.Name == "Hive2" then
-            local SlotHive = IndexHive.SlotHive
-            --local SlotFolder = #SlotHive:GetChildren()
-            
-            --print(SlotFolder)
-            for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
-                if _G.PData.Hive.Slot >= SlotNumber then
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                else -- дописать
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                    SlotNumber += 1
-                end
-                task.wait(0.05)
-                
-                TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                SlotNumber += 1
-            end
-        elseif IndexHive.Name == "Hive3" then
-            local SlotHive = IndexHive.SlotHive
-            --local SlotFolder = #SlotHive:GetChildren()
-            
-            --print(SlotFolder)
-            for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
-                if _G.PData.Hive.Slot >= SlotNumber then
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                else -- дописать
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                    SlotNumber += 1
-                end
-                task.wait(0.05)
-                
-                TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                SlotNumber += 1
-            end
-        elseif IndexHive.Name == "Hive4" then --Orientation 0, 178.6, 90
-            local SlotHive = IndexHive.SlotHive
-            --local SlotFolder = #SlotHive:GetChildren()
-            
-            --print(SlotFolder)
-            for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
-                if _G.PData.Hive.Slot >= SlotNumber then
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                else -- дописать
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                    SlotNumber += 1
-                end
-                task.wait(0.05)
-                
-                TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                SlotNumber += 1
-            end
-           
-        elseif IndexHive.Name == "Hive5" then
-            local SlotHive = IndexHive.SlotHive
-            --local SlotFolder = #SlotHive:GetChildren()
-            
-            --print(SlotFolder)
-            for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
-                if _G.PData.Hive.Slot >= SlotNumber then
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                else -- дописать
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                    SlotNumber += 1
-                end
-                task.wait(0.05)
-                
-                TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                SlotNumber += 1
-            end
-        elseif IndexHive.Name == "Hive6" then
-            local SlotHive = IndexHive.SlotHive
-            --local SlotFolder = #SlotHive:GetChildren()
-            
-            --print(SlotFolder)
-            for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
-                if _G.PData.Hive.Slot >= SlotNumber then
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                else -- дописать
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                    SlotNumber += 1
-                end
-                task.wait(0.05)
-                
-                TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                SlotNumber += 1
-            end
-        elseif IndexHive.Name == "Hive7" then
-            local SlotHive = IndexHive.SlotHive
-            --local SlotFolder = #SlotHive:GetChildren()
-            
-            --print(SlotFolder)
-            for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
-                if _G.PData.Hive.Slot >= SlotNumber then
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                else -- дописать
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                    SlotNumber += 1
-                end
-                task.wait(0.05)
-                
-                TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                SlotNumber += 1
-            end
-        elseif IndexHive.Name == "Hive8" then
-            local SlotHive = IndexHive.SlotHive
-            --local SlotFolder = #SlotHive:GetChildren()
-            
-            --print(SlotFolder)
-            for _, SlotFolder in next, IndexHive.SlotHive:GetChildren() do
-                if _G.PData.Hive.Slot >= SlotNumber then
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                else -- дописать
-                    TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                    SlotNumber += 1
-                end
-                task.wait(0.05)
-                
-                TweenService:Create(IndexHive.SlotHive["Slot"..SlotNumber], TweenInfoSlot, {Transparency = 0}):Play()
-                SlotNumber += 1
-            end
+        else
+            IndexHive.Highlight.Enabled = false
+            IndexHive.Platform.Highlight.Enabled = false
+            IndexHive.Platform.Up.Indecator.Button.Enabled = false
+            TweenModule:SizeBasicButtonClose(Button)
         end
     end
-    SlotSpawnHive()
+end
+
+
+
+function ButtonCheckClient(IndexHive)
+
+    print(_G.PData.BaseFakeSettings.HiveNumberOwner)
+    if _G.PData.BaseFakeSettings.HiveNumberOwner == IndexHive then -- тут проблема пустая строка 
+        IndexHive.Highlight.Enabled = true
+        IndexHive.Platform.Highlight.Enabled = true
+        IndexHive.Platform.Up.Indecator.Button.Enabled = true
+    else
+        for _, AllHive in next, HiveFolder:GetChildren() do
+            if _G.PData.BaseFakeSettings.HiveNumberOwner ~= AllHive.Name then
+                --print(AllHive)
+                --print(AllHive:FindFirstChild("Button"))
+                Player.Character.UpperTorso.BeamHive:Destroy()
+                AllHive.Platform.Up.Indecator.Button.Enabled = false
+                AllHive.Platform.Highlight.Enabled = false
+                AllHive.Highlight.Enabled = false
+            else
+                Player.Character.UpperTorso.BeamHive:Destroy()
+            end
+        end
+        Remote.HiveButtonCheck:FireServer(IndexHive)
+    end
+end
+
+function BeanCheckGame(Character, HiveFolder)
+    task.spawn(function()
+        task.wait()
+        local BeamHive = game:GetService("ReplicatedStorage").Assert.BeamHive
+        local UpperTorso = Character.UpperTorso
+        local AttachmentPlayer = Character.UpperTorso.AttachmentPlayer
+        local Count = 0
+        local CountStart = 0
+
+        for _, IndexHive in next, HiveFolder:GetChildren() do
+            if IndexHive.Owner.Value == "" then
+                Count += 1
+            end
+        end
+        repeat
+            task.wait()
+            for _, IndexHive in next, HiveFolder:GetChildren() do
+                if IndexHive.Owner.Value == "" then
+                    local BeamHiveClone = BeamHive:Clone()
+                    BeamHiveClone.Parent = UpperTorso
+                    BeamHiveClone.Attachment0 = AttachmentPlayer
+                    BeamHiveClone.Attachment1 = IndexHive.Platform.Up.Indecator.AttachmentHive
+                    CountStart += 1
+                end
+            end
+            
+        until CountStart == Count
+    end)
 end
 
 function NewHive(IndexHive) -- Взаимодействие с кнопкой
@@ -193,10 +101,14 @@ function NewHive(IndexHive) -- Взаимодействие с кнопкой
             UserInputService.InputBegan:Connect(function(input)
                 if input.KeyCode == Enum.KeyCode.E and HiveStart == 0 then
                     HiveStart = 1
+                    _G.PData.BaseFakeSettings.HiveNumberOwner = IndexHive.Name
+                    --ButtonCheckClient(IndexHive)
                     Remote.HiveOwner:FireServer(IndexHive,HiveFolder)
                     Remote.HiveSettings:FireServer(IndexHive)
+                    Remote.HiveSpawnSlot:FireServer(IndexHive)
                     IndexHive.Platform.Up.Indecator.Button.Text.Image = "rbxassetid://16558543722"
-                    HiveAndSlot(IndexHive)
+                    ButtonCheckClient(IndexHive)
+
                     --[[ -- Bag
 
                     -- {0.27, 0},{0.25, 0} для кнопки 
@@ -216,7 +128,7 @@ function NewHive(IndexHive) -- Взаимодействие с кнопкой
         end
     end)
 end
-
+BeanCheckGame(Player.Character, HiveFolder)
 for _, IndexHive in next, HiveFolder:GetChildren() do
 
     task.spawn(function()
@@ -224,7 +136,6 @@ for _, IndexHive in next, HiveFolder:GetChildren() do
             task.wait(0.1)
             local Distation = (IndexHive.Platform.Up.Indecator.Position - HumRootPart.Position).Magnitude
             ButtonDistation(Distation, IndexHive.Platform.Up.Indecator.Button, IndexHive)
-
         end
     end)
 

@@ -15,7 +15,8 @@ function Data.new(Player)
 
 	PData.BaseFakeSettings = {
 		HiveOwner = "",
-		HiveNumber = 0,
+		HiveNumberOwner = "",
+		
 	}
 	
 	PData.BaseSettings = { 
@@ -33,7 +34,6 @@ function Data.new(Player)
 
     PData.Hive = {
         Slot = 35,
-		SlotMax = 35,
         WaspInSlot = 0,
         RolingWasp = 0,
     }
@@ -107,8 +107,8 @@ end
 
 local AutoSaves = {}
 
-local MainKey = 'DataMainServerAlifa12'
-local ClientKey = 'DataMainClientAlifa12'
+local MainKey = 'DataMainServerAlifa1s1as'
+local ClientKey = 'DataMainClientAlifa1s1as'
 
 local DataStore2 = require(game.ServerScriptService.DataStore2)
 

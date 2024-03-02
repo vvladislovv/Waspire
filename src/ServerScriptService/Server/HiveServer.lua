@@ -1,88 +1,156 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Remote = ReplicatedStorage:WaitForChild('Remote')
 local Data = require(script.Parent.Data)
+local TweenService = game:GetService('TweenService')
 local HiveFolder = workspace.Hive
 
 local HiveServer = {}
 
 
-function HiveSettingsBasic(Player, IndexPlatform) -- Косание локал(Изменения на севере)
+function HiveSettingsBasic(Player, IndexHive) -- Косание локал(Изменения на севере)
     local PData = Data:Get(Player)
     if PData.BaseFakeSettings.HiveOwner == "" then
-        IndexPlatform.Owner.Value = Player.Name
-        IndexPlatform.NamePlayerHive.BillboardGui.TextLabel.Text = Player.Name
+        IndexHive.Platform.Up.Indecator.AttachmentHive:Destroy()
+        IndexHive.Owner.Value = Player.Name
+        IndexHive.NamePlayerHive.BillboardGui.TextLabel.Text = Player.Name
+        PData.BaseFakeSettings.HiveNumberOwner = IndexHive.Name
+
         PData.BaseFakeSettings.HiveOwner = Player.Name
         PData:Update('BaseFakeSettings', PData.BaseFakeSettings)
     end
 
 end
 
-function BeanCheckGame()
-    local HiveFolder = workspace.Hive
+function HiveAndSlot(Plr, IndexHive)
+    local PData = Data:Get(Plr)
 
-    local function CheckHive(Char) -- переписать на склиент
-        --for _, AllHive in next, HiveFolder:GetChildren() do
-            if HiveFolder.Hive1.Owner.Value == "" then
-                Char.UpperTorso.Beam1.Enabled = true
-            else
-                Char.UpperTorso.Beam1.Enabled = false
-            end
-
-            if HiveFolder.Hive2.Owner.Value == "" then
-                Char.UpperTorso.Beam2.Enabled = true
-            else
-                Char.UpperTorso.Beam2.Enabled = false
-            end
-
-            if HiveFolder.Hive3.Owner.Value == "" then
-                Char.UpperTorso.Beam3.Enabled = true
-            else
-                Char.UpperTorso.Beam3.Enabled = false
-            end
-
-            if HiveFolder.Hive4.Owner.Value == "" then
-                Char.UpperTorso.Beam4.Enabled = true
-            else
-                Char.UpperTorso.Beam4.Enabled = false
-            end
-
-            if HiveFolder.Hive5.Owner.Value == "" then
-                Char.UpperTorso.Beam5.Enabled = true
-            else
-                Char.UpperTorso.Beam5.Enabled = false
-            end
-
-            if HiveFolder.Hive6.Owner.Value == "" then
-                Char.UpperTorso.Beam6.Enabled = true
-            else
-                Char.UpperTorso.Beam6.Enabled = false
-            end
-
-            if HiveFolder.Hive7.Owner.Value == "" then
-                Char.UpperTorso.Beam7.Enabled = true
-            else
-                Char.UpperTorso.Beam7.Enabled = false
-            end
-
-            if HiveFolder.Hive8.Owner.Value == "" then
-                Char.UpperTorso.Beam8.Enabled = true
-            else
-                Char.UpperTorso.Beam8.Enabled = false
-            end
-
-            
-        --end
+    local function SpawnHiveEffect()
+        IndexHive.Material = Enum.Material.Neon
+        TweenService:Create(IndexHive, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, 0, true), {Color = Color3.fromRGB(255, 255, 255)}):Play()
+        IndexHive.Material = Enum.Material.SmoothPlastic
     end
 
-    print('fff')
-    game.Players.PlayerAdded:Connect(function(player)
-        player.CharacterAdded:Connect(function(char)
-            CheckHive(char)
-        end)
+    local function SlotSpawnHive()
+
+        local TweenInfoSlot = TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut)
+        
+        if IndexHive.Name == "Hive1" then
+            if PData.Hive.Slot then
+                local CheckSlotPlayer = PData.Hive.Slot
+                local CheckSlot = 0
+                if CheckSlotPlayer ~= CheckSlot then
+                    repeat
+                        CheckSlot += 1
+                        TweenService:Create(IndexHive.SlotHive["Slot"..CheckSlot], TweenInfoSlot, {Transparency = 0}):Play()
+                    until CheckSlotPlayer == CheckSlot
+                end
+            end
+        elseif IndexHive.Name == "Hive2" then
+            if PData.Hive.Slot then
+                local CheckSlotPlayer = PData.Hive.Slot
+                local CheckSlot = 0
+                if CheckSlotPlayer ~= CheckSlot then
+                    repeat
+                        CheckSlot += 1
+                        TweenService:Create(IndexHive.SlotHive["Slot"..CheckSlot], TweenInfoSlot, {Transparency = 0}):Play()
+                    until CheckSlotPlayer == CheckSlot
+                end
+            end
+        elseif IndexHive.Name == "Hive3" then
+            if PData.Hive.Slot then
+                local CheckSlotPlayer = PData.Hive.Slot
+                local CheckSlot = 0
+                if CheckSlotPlayer ~= CheckSlot then
+                    repeat
+                        CheckSlot += 1
+                        TweenService:Create(IndexHive.SlotHive["Slot"..CheckSlot], TweenInfoSlot, {Transparency = 0}):Play()
+                    until CheckSlotPlayer == CheckSlot
+                end
+            end
+        elseif IndexHive.Name == "Hive4" then --Orientation 0, 178.6, 90
+            if PData.Hive.Slot then
+                local CheckSlotPlayer = PData.Hive.Slot
+                local CheckSlot = 0
+                if CheckSlotPlayer ~= CheckSlot then
+                    repeat
+                        CheckSlot += 1
+                        TweenService:Create(IndexHive.SlotHive["Slot"..CheckSlot], TweenInfoSlot, {Transparency = 0}):Play()
+                    until CheckSlotPlayer == CheckSlot
+                end
+            end
+        elseif IndexHive.Name == "Hive5" then
+            if PData.Hive.Slot then
+                local CheckSlotPlayer = PData.Hive.Slot
+                local CheckSlot = 0
+                if CheckSlotPlayer ~= CheckSlot then
+                    repeat
+                        CheckSlot += 1
+                        TweenService:Create(IndexHive.SlotHive["Slot"..CheckSlot], TweenInfoSlot, {Transparency = 0}):Play()
+                    until CheckSlotPlayer == CheckSlot
+                end
+            end
+        elseif IndexHive.Name == "Hive6" then
+            if PData.Hive.Slot then
+                local CheckSlotPlayer = PData.Hive.Slot
+                local CheckSlot = 0
+                if CheckSlotPlayer ~= CheckSlot then
+                    repeat
+                        CheckSlot += 1
+                        TweenService:Create(IndexHive.SlotHive["Slot"..CheckSlot], TweenInfoSlot, {Transparency = 0}):Play()
+                    until CheckSlotPlayer == CheckSlot
+                end
+            end
+        elseif IndexHive.Name == "Hive7" then
+            if PData.Hive.Slot then
+                local CheckSlotPlayer = PData.Hive.Slot
+                local CheckSlot = 0
+                if CheckSlotPlayer ~= CheckSlot then
+                    repeat
+                        CheckSlot += 1
+                        TweenService:Create(IndexHive.SlotHive["Slot"..CheckSlot], TweenInfoSlot, {Transparency = 0}):Play()
+                    until CheckSlotPlayer == CheckSlot
+                end
+            end
+        elseif IndexHive.Name == "Hive8" then
+            if PData.Hive.Slot then
+                local CheckSlotPlayer = PData.Hive.Slot
+                local CheckSlot = 0
+                if CheckSlotPlayer ~= CheckSlot then
+                    repeat
+                        CheckSlot += 1
+                        TweenService:Create(IndexHive.SlotHive["Slot"..CheckSlot], TweenInfoSlot, {Transparency = 0}):Play()
+                    until CheckSlotPlayer == CheckSlot
+                end
+            end
+        end
+    end
+
+    SpawnHiveEffect()
+    SlotSpawnHive()
+
+end
+
+
+
+function ButtonServerCheckPlayer(Plr, IndexHive)
+    task.spawn(function()
+        for _, Index in next, HiveFolder:GetChildren() do
+            while true do
+                task.wait()
+                if IndexHive.Owner.Value ~= "" and Plr then
+                    if Index.Name ~= IndexHive.Name then
+                        Index.Platform.Highlight.Enabled = true
+                        Index.Platform.Highlight.Enabled = true
+                        Index.Platform.Up.Indecator.Button.Enabled = true
+                    end
+                end
+            end 
+        end
     end)
 end
 
-function CheckButton(Player, IndexPlatform, AllHive) -- переписать на склиент
+
+function CheckButton(Player, AllHive) -- переписать на склиент
     task.spawn(function()
         while true do
             task.wait()
@@ -190,8 +258,9 @@ function CheckButton(Player, IndexPlatform, AllHive) -- переписать н�
         end
     end)
 end
-BeanCheckGame()
-Remote.HiveOwner.OnServerEvent:Connect(CheckButton)
+Remote.HiveButtonCheck.OnServerEvent:Connect(ButtonServerCheckPlayer)
+Remote.HiveSpawnSlot.OnServerEvent:Connect(HiveAndSlot)
+--Remote.HiveOwner.OnServerEvent:Connect(CheckButton)
 Remote.HiveSettings.OnServerEvent:Connect(HiveSettingsBasic)
 
 return HiveServer
