@@ -16,6 +16,7 @@ function Data.new(Player)
 	PData.BaseFakeSettings = {
 		HiveOwner = "",
 		HiveNumberOwner = "",
+		OpenShopPlayer = false
 		
 	}
 	
@@ -107,8 +108,8 @@ end
 
 local AutoSaves = {}
 
-local MainKey = 'DataMainServerAlifa1s1as'
-local ClientKey = 'DataMainClientAlifa1s1as'
+local MainKey = 'DataMainServerAlifa1s1a2s'
+local ClientKey = 'DataMainClientAlifa1s1a2s'
 
 local DataStore2 = require(game.ServerScriptService.DataStore2)
 
