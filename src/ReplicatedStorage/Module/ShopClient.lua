@@ -10,14 +10,19 @@ local Libary = ReplicatedStorage.Libary
 local TweenModule = require(Libary.TweenService)
 local ButtonFolder = workspace.ButtonMap
 local ShopCleint = {}
+
+local TableSettings = {
+    ShopMini = false
+}
 _G.PData = Remote.GetDataSave:InvokeServer()
 
-function ButtonDistation(Distation, Button, indexShop) -- Баг с системой 
+function ButtonDistation(Distation, Button, indexShop)
     task.wait()
     if Distation < 10 then
         TweenModule:SizeBasicButtonOpen(Button)
-        if indexShop.Name == "ShopMiniButton" and Distation < 10 then
-            NubShop:OpenShop()
+        if indexShop.Name == "ShopMiniButton" then
+            TableSettings.ShopMini = true
+            NubShop:OpenShop(TableSettings.ShopMini)
         elseif indexShop.Name == "ShopEgg" then
             ButtonShopEgg()
         elseif indexShop.Name == "ShopCooking" then
@@ -31,6 +36,11 @@ function ButtonDistation(Distation, Button, indexShop) -- Баг с систем
         end
     elseif Distation > 10 then
         TweenModule:SizeBasicButtonClose(Button)
+        if indexShop.Name == "ShopMiniButton" then
+            TableSettings.ShopMini = false
+            NubShop:OpenShop(TableSettings.ShopMini)
+        end
+        
     end
 end
 

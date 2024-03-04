@@ -1,3 +1,5 @@
+local Equipment = require(script.Equipment)
+Equipment:StartSysmes()
 local Server = game.ServerScriptService.Server
 
 for _, index in next, Server:GetDescendants() do
