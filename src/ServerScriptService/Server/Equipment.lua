@@ -13,6 +13,7 @@ PhysicsService:CollisionGroupSetCollidable("p","p", false)
 
 function NoCollide(Model) -- Отключение колизии
     Model:WaitForChild("Humanoid")
+    Model:WaitForChild('UpperTorso')
     Model:WaitForChild("HumanoidRootPart")
     Model:WaitForChild("Head")
     for _, value in pairs(Model:GetChildren()) do
@@ -119,14 +120,10 @@ function EquipmentModule:EquipItemsGame(Character, TypeItem, PData)
                     elseif TypeItem == "Belt" then
                         ItemObj1.Name = "Belt"
                         Humanoid:AddAccessory(ItemObj1)
+                    elseif TypeItem == "Tool" then
+                        ItemObj1.Name = "Tool"
+                        Humanoid:AddAccessory(ItemObj1)
                     end
-                elseif ItemObj1:IsA("Tool") then -- Копирование копания
-                            --local CollectScript = AssertSS.Tools:Clone()
-                            --CollectScript.Parent = ItemObj1
-                            ItemObj1.Parent = Character
-                            ItemObj1.Name = "Tool"
-                        else
-                            ItemObj1.Parent = Character
                 end
            end
         end

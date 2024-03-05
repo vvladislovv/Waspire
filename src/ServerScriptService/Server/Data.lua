@@ -63,8 +63,8 @@ function Data.new(Player)
 	}
 
 	PData.Equipment = {
-        Tool = "Scooper",
-        Bag = "Handbag",
+        Tool = "Scissors",
+        Bag = "Backpack",
 		Boot = "",
         Belt = "",
         Hat = "",

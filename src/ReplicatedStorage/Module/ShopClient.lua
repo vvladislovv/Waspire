@@ -4,6 +4,7 @@ local HumRootPart = character:WaitForChild('HumanoidRootPart')
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local NubShop = require(script.Parent.ButtonMapModule.NubShop)
+local CocnShop = require(script.Parent.ButtonMapModule.CocoonShop)
 
 local Remote = ReplicatedStorage:WaitForChild('Remote')
 local Libary = ReplicatedStorage.Libary
@@ -12,9 +13,13 @@ local ButtonFolder = workspace.ButtonMap
 local ShopCleint = {}
 
 local TableSettings = {
-    ShopMini = false
+    ShopMini = false,
+    ShopCocoon = false,
 }
 _G.PData = Remote.GetDataSave:InvokeServer()
+
+
+
 
 function ButtonDistation(Distation, Button, indexShop)
     task.wait()
@@ -23,8 +28,9 @@ function ButtonDistation(Distation, Button, indexShop)
         if indexShop.Name == "ShopMiniButton" then
             TableSettings.ShopMini = true
             NubShop:OpenShop(TableSettings.ShopMini)
-        elseif indexShop.Name == "ShopEgg" then
-            ButtonShopEgg()
+        elseif indexShop.Name == "ShopCocoon" then
+                TableSettings.ShopCocoon = true
+                CocnShop:OpenShop(TableSettings.ShopCocoon)
         elseif indexShop.Name == "ShopCooking" then
             ButtonShopCooking()
         elseif indexShop.Name == "QuestMosquito"then
@@ -39,6 +45,9 @@ function ButtonDistation(Distation, Button, indexShop)
         if indexShop.Name == "ShopMiniButton" then
             TableSettings.ShopMini = false
             NubShop:OpenShop(TableSettings.ShopMini)
+        elseif indexShop.Name == "ShopCocoon" then
+            TableSettings.ShopCocoon = true
+            NubShop:OpenShop(TableSettings.ShopCocoon)
         end
         
     end

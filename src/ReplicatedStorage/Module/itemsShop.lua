@@ -51,7 +51,7 @@ ItemsShop.StartShop = {
 
     ['Product6'] = {
         Name = "Basic Boots",
-        Cost = 25000,
+        Cost = 15000,
         ShopType = "ShopMiniButton",
         Type = "Boot",
         Description = "///",
@@ -68,46 +68,58 @@ ItemsShop.StartShop = {
         OrderShop = 7,
         Ingredients = {}
     },  
-
     ['Product8'] = {
-        Name = "Backpack",
-        Cost = 0,
-        Capacity = 150,
-        ShopType = "ShopMiniButton",
-        Type = "Bag",
-        Description = "///",
-        OrderShop = 8
-    },
-    ['Product9'] = {
-        Name = "Bag",
-        Cost = 1500,
-        Capacity = 1000,
-        ShopType = "ShopMiniButton",
-        Type = "Bag",
-        Description = "///",
-        OrderShop = 9
-    },
-    ['Product10'] = {
         Name = "Testtube",
-        Cost = 1500,
+        Cost = 4500,
         Capacity = 2500,
         ShopType = "ShopMiniButton",
         Type = "Bag",
         Description = "///",
-        OrderShop = 10,
+        OrderShop = 9,
         Ingredients = {}
     },
-    ['Product11'] = {
+    ['Product9'] = {
         Name = "Hiking Backpack",
         Cost = 12000,
         Capacity = 5000,
         ShopType = "ShopMiniButton",
         Type = "Bag",
         Description = "///",
-        OrderShop = 11,
+        OrderShop = 8,
         Ingredients = {}
     },
+    ['Product10'] = {
+        Name = "Bag",
+        Cost = 1500,
+        Capacity = 1000,
+        ShopType = "ShopMiniButton",
+        Type = "Bag",
+        Description = "///",
+        OrderShop = 10
+    },
+    ['Product11'] = {
+        Name = "Backpack",
+        Cost = 0,
+        Capacity = 150,
+        ShopType = "ShopMiniButton",
+        Type = "Bag",
+        Description = "///",
+        OrderShop = 11
+    },
 
+}
+
+
+ItemsShop.EggShop = {
+    ['Product1'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 1
+        
+    },
 }
 
 

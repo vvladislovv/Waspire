@@ -59,21 +59,25 @@ function GetItemShop()
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     elseif ItemsTable.OrderShop == 9 and CameraNow == 9 then
                         Ingredients = true
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     elseif ItemsTable.OrderShop == 10 and CameraNow == 10 then
                         Ingredients = false
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     elseif ItemsTable.OrderShop == 11 and CameraNow == 11 then
                         Ingredients = false
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     end
                     --print('fff')
                 elseif ItemsTable.Type == "Tool" then
@@ -82,35 +86,41 @@ function GetItemShop()
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"    
                     elseif ItemsTable.OrderShop == 2 and CameraNow == 2 then
                         Ingredients = false
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     elseif ItemsTable.OrderShop == 3 and CameraNow == 3 then
                         Ingredients = true
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     elseif ItemsTable.OrderShop == 4 and CameraNow == 4 then
                         Ingredients = true
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     end
-                elseif ItemsTable.Type == "Boot" then
+                elseif ItemsTable.Type == "Hat" then
                     if ItemsTable.OrderShop == 5 and CameraNow == 5 then
                         Ingredients = true
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     end
-                elseif ItemsTable.Type == "Hat" then
+                elseif ItemsTable.Type == "Boot" then
                     if ItemsTable.OrderShop == 6 and CameraNow == 6 then
                         Ingredients = true
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     end
                 elseif ItemsTable.Type == "Belt" then
                     if ItemsTable.OrderShop == 7 and CameraNow == 7 then
@@ -118,6 +128,7 @@ function GetItemShop()
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
+                        FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     end
                 end
 
@@ -125,7 +136,6 @@ function GetItemShop()
         end)
     end
 end
-
 
 function NubShop:OpenShop(ShopMini)
     task.wait()
@@ -156,10 +166,6 @@ UserInputService.InputBegan:Connect(function(input, GPE) -- появление
     end
 end)
 
-
-function NubShop:UpdateShop()
-    
-end
 
 
 ButtonRight.ButtonDown.TextButton.MouseButton1Click:Connect(RightShopButton)
