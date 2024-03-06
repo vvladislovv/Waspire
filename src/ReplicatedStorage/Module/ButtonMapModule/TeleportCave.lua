@@ -67,7 +67,6 @@ UserInputService.InputBegan:Connect(function(input, GPE) -- появление
                 TweenService:Create(FrameBlackTeleport, TweenInfo.new(0.8, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {Transparency = 0}):Play()
                 GuiStart()
                 TweenCamera(CameraFolder.CaveGo.Cam1,CameraFolder.CaveGo.Cam2)
-                print('fff')
             --[[elseif input.KeyCode == Enum.KeyCode.E and _G.PData.BaseFakeSettings.OpenShopPlayer then
 				_G.PData.BaseFakeSettings.OpenShopPlayer = false
                 TweenService:Create(Cam, TweenInfo.new(0.4, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {CFrame = CamOriginal}):Play()

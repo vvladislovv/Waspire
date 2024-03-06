@@ -7,6 +7,7 @@ local NubShop = require(script.Parent.ButtonMapModule.NubShop)
 local CocnShop = require(script.Parent.ButtonMapModule.CocoonShop)
 local ShopCooking = require(script.Parent.ButtonMapModule.ShopCooking)
 local GoCave = require(script.Parent.ButtonMapModule.TeleportCave)
+local BottalCoin = require(script.Parent.ButtonMapModule.BottalCoin)
 
 local Remote = ReplicatedStorage:WaitForChild('Remote')
 local Libary = ReplicatedStorage.Libary
@@ -19,6 +20,7 @@ local TableSettings = {
     ShopCocoon = false,
     ShopCooking = false,
     GoCave = false,
+    BottalCoin = false
 }
 _G.PData = Remote.GetDataSave:InvokeServer()
 
@@ -30,15 +32,14 @@ function ButtonDistation(Distation, Button, indexShop)
     if Distation < 10 then
         TweenModule:SizeBasicButtonOpen(Button)
         if indexShop.Name == "ShopMiniButton" then
-            --print('ffff')
-                TableSettings.ShopMini = true
-                NubShop:OpenShop(TableSettings.ShopMini)
+            TableSettings.ShopMini = true
+            NubShop:OpenShop(TableSettings.ShopMini)
         elseif indexShop.Name == "ShopCocoon" then
-                TableSettings.ShopCocoon = true
-                CocnShop:OpenShop(TableSettings.ShopCocoon)
+            TableSettings.ShopCocoon = true
+            CocnShop:OpenShop(TableSettings.ShopCocoon)
         elseif indexShop.Name == "ShopCooking" then
-                TableSettings.ShopCooking = true
-                ShopCooking:OpenShop(TableSettings.ShopCooking)
+            TableSettings.ShopCooking = true
+            ShopCooking:OpenShop(TableSettings.ShopCooking)
         elseif indexShop.Name == "QuestMosquito"then
             ButtonQuestMosquito()
         elseif indexShop.Name == "ShopSnail" then
@@ -50,6 +51,11 @@ function ButtonDistation(Distation, Button, indexShop)
             print('ff')
         elseif indexShop.Name == "QusetOpenLocation" then
             --print('aa')
+        elseif indexShop.Name == "LeaderStats" then
+
+        elseif indexShop.Name == "BottalCoin" then
+            TableSettings.BottalCoin = true
+            BottalCoin:OpenShop(TableSettings.BottalCoin)
         end
     elseif Distation > 10 then
         TweenModule:SizeBasicButtonClose(Button)
@@ -65,6 +71,9 @@ function ButtonDistation(Distation, Button, indexShop)
         elseif indexShop.Name == "GoCave" then
             TableSettings.GoCave = false
             GoCave:OpenShop(TableSettings.GoCave)
+        elseif indexShop.Name == "BottalCoin" then
+            TableSettings.BottalCoin = false
+            BottalCoin:OpenShop(TableSettings.BottalCoin)
         end
         
     end
