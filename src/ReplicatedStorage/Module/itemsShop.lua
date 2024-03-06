@@ -122,5 +122,89 @@ ItemsShop.EggShop = {
     },
 }
 
+ItemsShop.CookingShop = {
+    ['Product1'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 1
+        
+    },
+    ['Product2'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 2
+        
+    },
+    ['Product3'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 3
+        
+    },
+    ['Product4'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 4
+        
+    },
+    ['Product5'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 5
+        
+    },
+    ['Product6'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 6
+        
+    },
+    ['Product7'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 7
+        
+    },
+    ['Product8'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 8
+        
+    },
+    ['Product9'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 9
+        
+    },
+}
+
 
 return ItemsShop

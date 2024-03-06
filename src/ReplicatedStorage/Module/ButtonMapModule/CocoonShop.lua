@@ -1,7 +1,8 @@
 local EggShop = {}
-local UserInputService = game:GetService("UserInputService")
+
 local ShopMiniClient = false
 local Player = game:GetService("Players").LocalPlayer
+local PlayerScript = Player:WaitForChild("PlayerScripts")
 local character = Player.Character or Player.CharacterAdded:Wait()
 local Humanoid = character:WaitForChild('Humanoid')
 local PlayerGui = Player:WaitForChild('PlayerGui')
@@ -11,7 +12,10 @@ local ButtonBuy = ShopCoccon.ButtonBuy
 local FrameGlobule = ShopCoccon.FrameGlobule
 
 local Cam = game.Workspace.CurrentCamera
-local originalcframe = Cam.CFrame
+local CamOriginal = nil
+local PlayerModule = require(PlayerScript:WaitForChild("PlayerModule"))
+local Controls = PlayerModule:GetControls()
+
 local ItemsModule = require(script.Parent.Parent.itemsShop)
 local CameraFolder = workspace.CameraFolder
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -50,25 +54,29 @@ function GetItemShop()
         end)
     end
 end
+
+
 UserInputService.InputBegan:Connect(function(input, GPE) -- появление
     if not GPE then
         if ShopMiniClient then
             if input.KeyCode == Enum.KeyCode.E and not _G.PData.BaseFakeSettings.OpenShopPlayer then
                 _G.PData.BaseFakeSettings.OpenShopPlayer = true
                 UI.ShopCoccon.Visible = true
+                CamOriginal = Cam.CFrame
+                Controls:Disable()
                 Cam.CameraType = Enum.CameraType.Scriptable
-                TweenService:Create(Cam, TweenInfo.new(0.2, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {CFrame = CameraFolder.CameraShopCocon.Cam1.CFrame}):Play()
+                TweenService:Create(Cam, TweenInfo.new(0.4, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {CFrame = CameraFolder.CameraShopCocon.Cam1.CFrame}):Play()
                 --Cam.CFrame = CameraFolder.CameraShopCocon.Cam1.CFrame
                 GetItemShop()
             elseif input.KeyCode == Enum.KeyCode.E and _G.PData.BaseFakeSettings.OpenShopPlayer then
                 _G.PData.BaseFakeSettings.OpenShopPlayer = false
-                -- Дописать на отдачу камеры по красоте
-                --Cam.CameraType = Enum.CameraType.Custom
-                --TweenService:Create(CameraFolder.CameraShopCocon.Cam1, TweenInfo.new(0.2, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {CFrame = originalcframe}):Play()
+                TweenService:Create(Cam, TweenInfo.new(0.4, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {CFrame = CamOriginal}):Play()
+                task.wait(0.1)
                 Cam.CameraType = Enum.CameraType.Custom
-			    Cam.CameraSubject = Humanoid
                 CameraNow = 1
-                UI.ShopCoccon.Visible = false              
+                Controls:Enable()
+                UI.ShopCoccon.Visible = false
+                --Cam.CameraType = Enum.CameraType.Custom       
             end
         end
     end
