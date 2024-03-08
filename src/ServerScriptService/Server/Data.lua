@@ -74,6 +74,17 @@ function Data.new(Player)
 		Parachute = "" 
 	}
 
+	PData.TimerTable = {
+		["BottalCoin"] = {
+			Time = 0
+		},
+		["WatherEvent"] = {
+			Time = 0
+		},
+		["clownEvent"] = {
+			Time = 0
+		}
+	}
 	PData.Bagers = {
 		['Pollen'] = {
             Rank = 1,
@@ -110,8 +121,8 @@ end
 
 local AutoSaves = {}
 
-local MainKey = 'DataMainServerAlifa1s1a2s'
-local ClientKey = 'DataMainClientAlifa1s1a2s'
+local MainKey = 'DataMainServerAlifa1s1a2s3'
+local ClientKey = 'DataMainClientAlifa1s1a2s3'
 
 local DataStore2 = require(game.ServerScriptService.DataStore2)
 
@@ -143,6 +154,10 @@ function GetDataFromDataStorage(Client, DataStorage)
 
 	for i,v in pairs(DataStorage.TotalItems) do
 		PData.TotalItems[i] = DataStorage.TotalItems[i]
+	end
+
+	for i,v in pairs(DataStorage.TimerTable) do
+		PData.TimerTable[i] = DataStorage.TimerTable[i]
 	end
 
 	for i,v in pairs(DataStorage.BoostPollen) do

@@ -8,6 +8,7 @@ local CocnShop = require(script.Parent.ButtonMapModule.CocoonShop)
 local ShopCooking = require(script.Parent.ButtonMapModule.ShopCooking)
 local GoCave = require(script.Parent.ButtonMapModule.TeleportCave)
 local BottalCoin = require(script.Parent.ButtonMapModule.BottalCoin)
+local Leaderboard = require(script.Parent.ButtonMapModule.leaderboard)
 
 local Remote = ReplicatedStorage:WaitForChild('Remote')
 local Libary = ReplicatedStorage.Libary
@@ -20,7 +21,8 @@ local TableSettings = {
     ShopCocoon = false,
     ShopCooking = false,
     GoCave = false,
-    BottalCoin = false
+    BottalCoin = false,
+    Leaderboard = false
 }
 _G.PData = Remote.GetDataSave:InvokeServer()
 
@@ -46,13 +48,14 @@ function ButtonDistation(Distation, Button, indexShop)
             ButtonShopSnail()
         elseif indexShop.Name == "GoCave" then
             TableSettings.GoCave = true
-            GoCave:OpenShop(TableSettings.GoCave)
+            Leaderboard:OpenShop(TableSettings.GoCave)
         elseif indexShop.Name == "WatherEvent" then
-            print('ff')
+            
         elseif indexShop.Name == "QusetOpenLocation" then
             --print('aa')
         elseif indexShop.Name == "LeaderStats" then
-
+            TableSettings.Leaderboard = true
+            Leaderboard:OpenShop(TableSettings.Leaderboard)
         elseif indexShop.Name == "BottalCoin" then
             TableSettings.BottalCoin = true
             BottalCoin:OpenShop(TableSettings.BottalCoin)
@@ -74,6 +77,9 @@ function ButtonDistation(Distation, Button, indexShop)
         elseif indexShop.Name == "BottalCoin" then
             TableSettings.BottalCoin = false
             BottalCoin:OpenShop(TableSettings.BottalCoin)
+        elseif indexShop.Name == "LeaderStats" then
+            TableSettings.Leaderboard = false
+            Leaderboard:OpenShop(TableSettings.Leaderboard)
         end
         
     end

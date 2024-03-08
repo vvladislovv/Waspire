@@ -1,12 +1,17 @@
-local Players = game:GetService("Players")
 local TimerModule = {}
+--[[
+local Players = game:GetService("Players")
+local Data = require(script.Parent.Data)
+
+local TimerModule = {}
+
 
 local TimerMax = os.time() + 240
 local TimeLeavePlayer = nil
+
 task.spawn(function()
     while true do
-        task.wait() 
-        print(TimerMax) -- время мах
+        task.wait()         print(TimerMax) -- время мах
         print(os.time()) -- время сейчас
         if os.time() == TimerMax then
             print('ffff')
@@ -24,6 +29,6 @@ Players.PlayerAdded:Connect(function(player)
     print(os.time() - TimeLeavePlayer)
 end)
 
-
+=]]
 
 return TimerModule
