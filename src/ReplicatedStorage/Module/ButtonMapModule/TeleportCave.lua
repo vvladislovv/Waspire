@@ -10,6 +10,8 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local CamOriginal = nil
 local PlayerScript = Player:WaitForChild("PlayerScripts")
 local PlayerModule = require(PlayerScript:WaitForChild("PlayerModule"))
+local TweenModule = require(game.ReplicatedStorage.Libary.TweenService)
+
 local Controls = PlayerModule:GetControls()
 local ItemsModule = require(script.Parent.Parent.itemsShop)
 local Cam = game.Workspace.CurrentCamera
@@ -64,7 +66,7 @@ UserInputService.InputBegan:Connect(function(input, GPE) -- появление
                 Cam.CameraType = Enum.CameraType.Scriptable
                 --TweenService:Create(FrameBlackTeleport.TextLabel, TweenInfo.new(0.8, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {TextTransparency = 0}):Play()
                 TweenService:Create(Cam, TweenInfo.new(1, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {CFrame = CameraFolder.CaveGo.Cam2.CFrame}):Play()
-                TweenService:Create(FrameBlackTeleport, TweenInfo.new(0.8, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {Transparency = 0}):Play()
+                TweenModule:TransparencyBlack(FrameBlackTeleport)
                 GuiStart()
                 TweenCamera(CameraFolder.CaveGo.Cam1,CameraFolder.CaveGo.Cam2)
             --[[elseif input.KeyCode == Enum.KeyCode.E and _G.PData.BaseFakeSettings.OpenShopPlayer then

@@ -24,7 +24,6 @@ function Utils:FormatTime(Seconds)
     else
         return Format(Minutes)..":"..Format(Seconds)
     end
-    
 end
 
 return Utils

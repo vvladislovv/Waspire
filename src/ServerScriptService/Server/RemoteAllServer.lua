@@ -2,7 +2,6 @@
 local RemoteAllServer = {}
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Players = game:GetService("Players")
 local Data = require(script.Parent.Data)
 local Remote = ReplicatedStorage:WaitForChild('Remote')
 
@@ -17,6 +16,14 @@ function BottalCoinData(Player, MathNumber, NofficalBottle)
     end
 end
 
-Remote.BottalCoinEvent.OnServerEvent:Connect(BottalCoinData)
+function TutorialCheck(Player, Perment)
+    local PData = Data:Get(Player)
+    if Perment then
+        PData.GameSettings.SnailTutorial = true
+        PData:Update('GameSettings', PData.GameSettings)
+    end
+end
 
+Remote.BottalCoinEvent.OnServerEvent:Connect(BottalCoinData)
+Remote.TutorialServer.OnServerEvent:Connect(TutorialCheck)
 return RemoteAllServer

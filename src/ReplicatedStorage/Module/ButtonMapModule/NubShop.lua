@@ -1,4 +1,4 @@
--- Дописать Покупку и проверку на вещь
+-- Дописать Покупку и проверку на вещь(G)
 
 local Player = game:GetService("Players").LocalPlayer
 local PlayerGui = Player:WaitForChild('PlayerGui')
@@ -146,7 +146,6 @@ function NubShop:OpenShop(ShopMini)
     task.wait()
     if ShopMini then
         ShopMiniClient = true
-        --print(ShopMiniClient)
     elseif not ShopMini then
         ShopMiniClient = false
     end
@@ -158,7 +157,6 @@ UserInputService.InputBegan:Connect(function(input, GPE) -- появление
             print('aaa')
 			if input.KeyCode == Enum.KeyCode.E and not _G.PData.BaseFakeSettings.OpenShopPlayer then
                 CameraNow = 1
-                ShopIsNotBat = true
                 _G.PData.BaseFakeSettings.OpenShopPlayer = true
                 UI.Shop.Visible = true
                 CamOriginal = Cam.CFrame

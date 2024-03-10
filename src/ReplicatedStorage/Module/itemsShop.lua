@@ -109,7 +109,6 @@ ItemsShop.StartShop = {
 
 }
 
-
 ItemsShop.EggShop = {
     ['Product1'] = {
         Name = "Wasp Cocoon",
@@ -205,6 +204,55 @@ ItemsShop.CookingShop = {
         
     },
 }
-
+ItemsShop.SnailShop = {
+    ['Product1'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 1
+    },
+    ['Product2'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 2
+    },
+    ['Product3'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 3
+    },
+    ['Product4'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 4
+    },
+    ['Product5'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 5
+    },
+    ['Product6'] = {
+        Name = "Wasp Cocoon",
+        Cost = 550,
+        ShopType = "ShopСocoon",
+        Type = "Inventory",
+        Description = "///",
+        OrderShop = 6
+    },
+}
 
 return ItemsShop

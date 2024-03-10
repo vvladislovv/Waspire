@@ -9,6 +9,8 @@ local ShopCooking = require(script.Parent.ButtonMapModule.ShopCooking)
 local GoCave = require(script.Parent.ButtonMapModule.TeleportCave)
 local BottalCoin = require(script.Parent.ButtonMapModule.BottalCoin)
 local Leaderboard = require(script.Parent.ButtonMapModule.leaderboard)
+local WatherEventModule = require(script.Parent.ButtonMapModule.WeatherModule)
+local SnailModuleShop = require(script.Parent.ButtonMapModule.SnailModuleShop)
 
 local Remote = ReplicatedStorage:WaitForChild('Remote')
 local Libary = ReplicatedStorage.Libary
@@ -22,7 +24,9 @@ local TableSettings = {
     ShopCooking = false,
     GoCave = false,
     BottalCoin = false,
-    Leaderboard = false
+    Leaderboard = false,
+    WatherEvent = false,
+    SnailModuleShop = false
 }
 _G.PData = Remote.GetDataSave:InvokeServer()
 
@@ -45,12 +49,14 @@ function ButtonDistation(Distation, Button, indexShop)
         elseif indexShop.Name == "QuestMosquito"then
             ButtonQuestMosquito()
         elseif indexShop.Name == "ShopSnail" then
-            ButtonShopSnail()
+            TableSettings.SnailModuleShop = true
+            SnailModuleShop:OpenShop(TableSettings.SnailModuleShop)
         elseif indexShop.Name == "GoCave" then
             TableSettings.GoCave = true
-            Leaderboard:OpenShop(TableSettings.GoCave)
+            GoCave:OpenShop(TableSettings.GoCave)
         elseif indexShop.Name == "WatherEvent" then
-            
+            TableSettings.WatherEvent = true
+            WatherEventModule:OpenShop(TableSettings.WatherEvent)
         elseif indexShop.Name == "QusetOpenLocation" then
             --print('aa')
         elseif indexShop.Name == "LeaderStats" then
@@ -80,6 +86,12 @@ function ButtonDistation(Distation, Button, indexShop)
         elseif indexShop.Name == "LeaderStats" then
             TableSettings.Leaderboard = false
             Leaderboard:OpenShop(TableSettings.Leaderboard)
+        elseif indexShop.Name == "WatherEvent" then
+            TableSettings.WatherEvent = false
+            WatherEventModule:OpenShop(TableSettings.WatherEvent)
+        elseif indexShop.Name == "ShopSnail" then
+            TableSettings.SnailModuleShop = false
+            SnailModuleShop:OpenShop(TableSettings.SnailModuleShop)
         end
         
     end

@@ -19,6 +19,11 @@ function Data.new(Player)
 		OpenShopPlayer = false
 		
 	}
+
+	PData.GameSettings = {
+		SnailTutorial = false,
+		LocationOne = false
+	}
 	
 	PData.BaseSettings = { 
 		Coin = 0,
@@ -121,8 +126,8 @@ end
 
 local AutoSaves = {}
 
-local MainKey = 'DataMainServerAlifa1s1a2s3'
-local ClientKey = 'DataMainClientAlifa1s1a2s3'
+local MainKey = 'DataMainServerAlifa1s1a2s4'
+local ClientKey = 'DataMainClientAlifa1s1a2s4'
 
 local DataStore2 = require(game.ServerScriptService.DataStore2)
 
@@ -158,6 +163,10 @@ function GetDataFromDataStorage(Client, DataStorage)
 
 	for i,v in pairs(DataStorage.TimerTable) do
 		PData.TimerTable[i] = DataStorage.TimerTable[i]
+	end
+
+	for i,v in pairs(DataStorage.GameSettings) do
+		PData.GameSettings[i] = DataStorage.GameSettings[i]
 	end
 
 	for i,v in pairs(DataStorage.BoostPollen) do

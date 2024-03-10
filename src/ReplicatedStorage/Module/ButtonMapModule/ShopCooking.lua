@@ -73,7 +73,6 @@ end
 UserInputService.InputBegan:Connect(function(input, GPE) -- появление
     if not GPE then
         if ShopMiniClient then
-            print('fff')
             if input.KeyCode == Enum.KeyCode.E and not _G.PData.BaseFakeSettings.OpenShopPlayer then
                 _G.PData.BaseFakeSettings.OpenShopPlayer = true
                 UI.Shop.Visible = true

@@ -1,4 +1,5 @@
 local RainHandlr = {}
+
 task.spawn(function()
 	while true do
 		local player = game.Players.LocalPlayer
@@ -10,9 +11,9 @@ task.spawn(function()
 		local part = game.Workspace.Terrain.Clouds
 
 		local goal = {}
-		goal.Density = 1
+		goal.Density = 5
 		--change this to how dense you want the clouds to be
-		goal.Cover = 1
+		goal.Cover = 5
 		--change this to how much the clouds cover the sky
 		sound:Play()
 		local tweenInfo = TweenInfo.new(15)
@@ -43,4 +44,5 @@ task.spawn(function()
 		player.PlayerGui.Rain.Disabled = true
 	end
 end)
+
 return RainHandlr
