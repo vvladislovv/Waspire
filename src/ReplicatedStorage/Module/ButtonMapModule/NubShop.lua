@@ -23,6 +23,13 @@ local Remote = ReplicatedStorage:WaitForChild('Remote')
 _G.PData = Remote.GetDataSave:InvokeServer()
 local ShopMiniClient =  false
 
+local TableColorNofficalMSG = {
+    Colors = {
+        Variant1 = {[1] = Color3.fromRGB(106, 24, 27), [2] = Color3.fromRGB(136, 31, 33)}, -- Yes
+        Variant2 = {[1] = Color3.fromRGB(61, 186, 8), [2] = Color3.fromRGB(55, 166, 7)}, -- No
+    }
+}
+
 local NubShop = {}
 
 function LeftShopButton()
@@ -52,8 +59,49 @@ function TweenIngredients(Ingredients)
     end
 end
 
+
 function GetItemShop()
+    local TableIndex = nil
+    local function BuyItems(ItemsTable,Ingredients)
+        if _G.PData.BaseSettings.Coin == ItemsTable.Cost then
+            ButtonBuy.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[1]
+            ButtonBuy.ButtonDown.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[2] 
+            if Ingredients then
+                print(ItemsTable.Ingredients)
+                TableIndex = ItemsTable.Ingredients
+                if TableIndex ~= nil then
+                    FrameGlobule.ItemsProductAdd.UpFrame.Item1.TextLabel.TextColor3 = TableColorNofficalMSG.Colors.Variant2[1]
+                    print(ItemsTable.Ingredients)
+                else
+                    print('fffa')
+                end
+            else
+
+            end
+        else
+            if Ingredients then
+				if Ingredients then
+					TableIndex = ItemsTable.Ingredients
+					print(TableIndex)
+                    if TableIndex ~= nil then
+                        FrameGlobule.ItemsProductAdd.UpFrame.Item1.TextLabel.TextColor3 = TableColorNofficalMSG.Colors.Variant2[1]
+                        print(ItemsTable.Ingredients)
+                    else
+                        print('fffa')
+                    end
+                end
+            else
+
+            end
+
+            ButtonBuy.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant1[1]
+            ButtonBuy.ButtonDown.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant1[2]
+            ButtonBuy.ButtonDown.TextButton.Text = "No Equip"
+        end
+    end
+
     local Ingredients = false
+
     for _, ItemsTable in pairs(ItemsModule.StartShop) do
         task.spawn(function()
             while true do
@@ -61,24 +109,28 @@ function GetItemShop()
                 if ItemsTable.Type == "Bag" then
                     if ItemsTable.OrderShop == 8 and CameraNow == 8 then
                         Ingredients = true
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
                         FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     elseif ItemsTable.OrderShop == 9 and CameraNow == 9 then
                         Ingredients = true
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
                         FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     elseif ItemsTable.OrderShop == 10 and CameraNow == 10 then
                         Ingredients = false
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
                         FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     elseif ItemsTable.OrderShop == 11 and CameraNow == 11 then
                         Ingredients = false
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
@@ -88,24 +140,28 @@ function GetItemShop()
                 elseif ItemsTable.Type == "Tool" then
                     if ItemsTable.OrderShop == 1 and CameraNow == 1 then
                         Ingredients = false
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
                         FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"    
                     elseif ItemsTable.OrderShop == 2 and CameraNow == 2 then
                         Ingredients = false
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
                         FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     elseif ItemsTable.OrderShop == 3 and CameraNow == 3 then
                         Ingredients = true
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
                         FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
                     elseif ItemsTable.OrderShop == 4 and CameraNow == 4 then
                         Ingredients = true
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
@@ -114,6 +170,7 @@ function GetItemShop()
                 elseif ItemsTable.Type == "Hat" then
                     if ItemsTable.OrderShop == 5 and CameraNow == 5 then
                         Ingredients = true
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
@@ -122,6 +179,7 @@ function GetItemShop()
                 elseif ItemsTable.Type == "Boot" then
                     if ItemsTable.OrderShop == 6 and CameraNow == 6 then
                         Ingredients = true
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
@@ -130,6 +188,7 @@ function GetItemShop()
                 elseif ItemsTable.Type == "Belt" then
                     if ItemsTable.OrderShop == 7 and CameraNow == 7 then
                         Ingredients = true
+                        BuyItems(ItemsTable,Ingredients)
                         TweenIngredients(Ingredients)
                         FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
                         FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description

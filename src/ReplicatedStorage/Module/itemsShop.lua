@@ -26,7 +26,7 @@ ItemsShop.StartShop = {
         Type = "Tool",
         Description = "///",
         OrderShop = 3,
-        Ingredients = {}
+        Ingredients = {['Straberry'] = 1}
       
     },
     ['Product4'] = {
@@ -36,7 +36,7 @@ ItemsShop.StartShop = {
         Type = "Tool",
         Description = "///",
         OrderShop = 4,
-        Ingredients = {}
+        Ingredients = {['Straberry'] = 1}
     },
 
     ['Product5'] = {
@@ -46,7 +46,7 @@ ItemsShop.StartShop = {
         Type = "Hat",
         Description = "///",
         OrderShop = 5,
-        Ingredients = {}
+        Ingredients = {['Straberry'] = 1}
     },
 
     ['Product6'] = {
@@ -56,7 +56,7 @@ ItemsShop.StartShop = {
         Type = "Boot",
         Description = "///",
         OrderShop = 6,
-        Ingredients = {}
+        Ingredients = {['Straberry'] = 1}
     },   
     
     ['Product7'] = {
@@ -66,7 +66,7 @@ ItemsShop.StartShop = {
         Type = "Belt",
         Description = "///",
         OrderShop = 7,
-        Ingredients = {}
+        Ingredients = {['Straberry'] = 1}
     },  
     ['Product8'] = {
         Name = "Testtube",
@@ -75,8 +75,8 @@ ItemsShop.StartShop = {
         ShopType = "ShopMiniButton",
         Type = "Bag",
         Description = "///",
-        OrderShop = 9,
-        Ingredients = {}
+        OrderShop = 8,
+        Ingredients = {['Straberry'] = 1}
     },
     ['Product9'] = {
         Name = "Hiking Backpack",
@@ -85,8 +85,8 @@ ItemsShop.StartShop = {
         ShopType = "ShopMiniButton",
         Type = "Bag",
         Description = "///",
-        OrderShop = 8,
-        Ingredients = {}
+        OrderShop = 9,
+        Ingredients = {['Straberry'] = 1}
     },
     ['Product10'] = {
         Name = "Bag",
