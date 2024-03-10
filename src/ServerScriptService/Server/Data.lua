@@ -64,6 +64,14 @@ function Data.new(Player)
 	PData.Inventory = {
 		['Waspik Egg'] = {
             Amount = 1
+        },
+
+		['Send'] = {
+            Amount = 15
+        },
+
+		['Rock'] = {
+            Amount = 15
         }
 	}
 

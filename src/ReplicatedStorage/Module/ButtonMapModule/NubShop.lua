@@ -62,33 +62,34 @@ end
 
 function GetItemShop()
     local TableIndex = nil
-    local function BuyItems(ItemsTable,Ingredients)
+    local function BuyItems(ItemsTable,Ingredient)
+		--print(TableIndex)
         if _G.PData.BaseSettings.Coin == ItemsTable.Cost then
             ButtonBuy.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[1]
-            ButtonBuy.ButtonDown.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[2] 
-            if Ingredients then
-                print(ItemsTable.Ingredients)
-                TableIndex = ItemsTable.Ingredients
+            ButtonBuy.ButtonDown.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[2]
+            ButtonBuy.ButtonDown.TextButton.Text = "Equip"
+        else
+            
+            if Ingredient then -- придумать релизацию. Надо сделать чтобы находил и проверял если ли такая штука, и также если сколько нужно на пакупку
+                -- потом отправка на покупку, там проверка фейк или нет, и покупка в пдате
+                for NumberNamePredmet, QuantItems in pairs(ItemsTable.Ingredients) do
+                    for PDataNumberIndex, ItemsQuantPData in pairs(_G.PData.Inventory) do
+                        print(table.find(_G.PData.Inventory,NumberNamePredmet))
+                        if NumberNamePredmet == PDataNumberIndex then
+                            if ItemsQuantPData.Amount >= QuantItems then
+                                print("asdfasdf")
+                            else
+                                warn("Error")
+                            end
+                        else
+                            warn("Error")
+                        end 
+                    end
+                end
                 if TableIndex ~= nil then
                     FrameGlobule.ItemsProductAdd.UpFrame.Item1.TextLabel.TextColor3 = TableColorNofficalMSG.Colors.Variant2[1]
-                    print(ItemsTable.Ingredients)
                 else
-                    print('fffa')
-                end
-            else
-
-            end
-        else
-            if Ingredients then
-				if Ingredients then
-					TableIndex = ItemsTable.Ingredients
-					print(TableIndex)
-                    if TableIndex ~= nil then
-                        FrameGlobule.ItemsProductAdd.UpFrame.Item1.TextLabel.TextColor3 = TableColorNofficalMSG.Colors.Variant2[1]
-                        print(ItemsTable.Ingredients)
-                    else
-                        print('fffa')
-                    end
+                    
                 end
             else
 

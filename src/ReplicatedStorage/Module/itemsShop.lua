@@ -26,7 +26,13 @@ ItemsShop.StartShop = {
         Type = "Tool",
         Description = "///",
         OrderShop = 3,
-        Ingredients = {['Straberry'] = 1}
+        
+        ['Ingredients'] = {
+            Send = 2,
+            --Serk = 4,
+            Rock = 5,
+        }
+
       
     },
     ['Product4'] = {
