@@ -62,17 +62,12 @@ function Data.new(Player)
     }
 
 	PData.Inventory = {
-		['Waspik Egg'] = {
-            Amount = 1
-        },
-
-		['Send'] = {
-            Amount = 15
-        },
-
-		['Rock'] = {
-            Amount = 15
-        }
+		['Waspik Egg'] = 1,
+		['Strabbery'] = 15,
+		['Send'] = 15,
+		['Rock'] = 15,
+		['Flower'] = 15,
+		['Gold Egg'] = 1,
 	}
 
 	PData.Equipment = {

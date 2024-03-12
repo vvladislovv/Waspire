@@ -29,8 +29,9 @@ ItemsShop.StartShop = {
         
         ['Ingredients'] = {
             Send = 2,
-            --Serk = 4,
-            Rock = 5,
+            Rock = 4,
+            Strabbery = 225,
+            Flower = 225,
         }
 
       
@@ -42,7 +43,12 @@ ItemsShop.StartShop = {
         Type = "Tool",
         Description = "///",
         OrderShop = 4,
-        Ingredients = {['Straberry'] = 1}
+
+        ['Ingredients'] = {
+            Send = 34,
+            Serk = 2,
+
+        }
     },
 
     ['Product5'] = {
@@ -52,7 +58,12 @@ ItemsShop.StartShop = {
         Type = "Hat",
         Description = "///",
         OrderShop = 5,
-        Ingredients = {['Straberry'] = 1}
+
+        ['Ingredients'] = {
+            Straberry = 346,
+            Serk = 2,
+
+        }
     },
 
     ['Product6'] = {
@@ -62,7 +73,12 @@ ItemsShop.StartShop = {
         Type = "Boot",
         Description = "///",
         OrderShop = 6,
-        Ingredients = {['Straberry'] = 1}
+
+        ['Ingredients'] = {
+            Send = 334,
+            Serk = 2,
+
+        }
     },   
     
     ['Product7'] = {
@@ -72,7 +88,12 @@ ItemsShop.StartShop = {
         Type = "Belt",
         Description = "///",
         OrderShop = 7,
-        Ingredients = {['Straberry'] = 1}
+
+        ['Ingredients'] = {
+            Send = 2,
+            Strabbery = 225,
+            Flower = 225,
+        }
     },  
     ['Product8'] = {
         Name = "Testtube",
@@ -82,7 +103,11 @@ ItemsShop.StartShop = {
         Type = "Bag",
         Description = "///",
         OrderShop = 8,
-        Ingredients = {['Straberry'] = 1}
+        ['Ingredients'] = {
+            Rock = 4,
+            Strabbery = 225,
+            Flower = 225,
+        }
     },
     ['Product9'] = {
         Name = "Hiking Backpack",
@@ -92,7 +117,10 @@ ItemsShop.StartShop = {
         Type = "Bag",
         Description = "///",
         OrderShop = 9,
-        Ingredients = {['Straberry'] = 1}
+        ['Ingredients'] = {
+            Strabbery = 225,
+            Flower = 225,
+        }
     },
     ['Product10'] = {
         Name = "Bag",

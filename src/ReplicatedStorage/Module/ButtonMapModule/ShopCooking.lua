@@ -95,8 +95,8 @@ UserInputService.InputBegan:Connect(function(input, GPE) -- появление
     end
 end)
 
-ButtonRight.ButtonDown.TextButton.MouseButton1Click:Connect(RightShopButton)
-ButtonLeft.ButtonDown.TextButton.MouseButton1Click:Connect(LeftShopButton)
+ButtonRight.ButtonDown.TextButton.MouseButton1Click:Connect(LeftShopButton)
+ButtonLeft.ButtonDown.TextButton.MouseButton1Click:Connect(RightShopButton)
 
 
 
