@@ -1,7 +1,7 @@
 -- Дописать Покупку и проверку на вещь
 
 -- 12.03.24 
--- Надо как то придумать проверку ингридиентов на вещь, исправить баг на ингридиенты(хуй знает как это сделать)
+-- Сделать индекс, красивое появление и тажке больше и меньше на кнопки оставить задел на звук
 
 local Player = game:GetService("Players").LocalPlayer
 local PlayerGui = Player:WaitForChild('PlayerGui')
@@ -19,7 +19,6 @@ local CameraFolder = workspace.CameraFolder
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
-
 local Remote = ReplicatedStorage:WaitForChild('Remote')
 _G.PData = Remote.GetDataSave:InvokeServer()
 
@@ -38,19 +37,17 @@ local TableColorNofficalMSG = {
         Variant2 = {[1] = Color3.fromRGB(61, 186, 8), [2] = Color3.fromRGB(55, 166, 7)}, -- No
     }
 }
-local ItemsTablert = {}
 
 local NubShop = {}
 
 function LeftShopButton()
-     if CameraNow == MaxOrder then
+    if CameraNow == MaxOrder then
         CameraNow = 1
-     else
+    else
         CameraNow += 1
-     end
-    GetItemShop(CameraNow)
+        GetItemShop(CameraNow)
+    end
     TweenService:Create(Cam,TweenInfo.new(0.4, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),{CFrame = CameraFolder.CameraShopMini["Cam"..CameraNow].CFrame}):Play()
-
 end
 
 function RightShopButton()
@@ -60,6 +57,17 @@ function RightShopButton()
         CameraNow = MaxOrder
     end
     TweenService:Create(Cam,TweenInfo.new(0.4, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),{CFrame = CameraFolder.CameraShopMini["Cam"..CameraNow].CFrame}):Play() 
+
+end
+
+function MouseButtonEqument(ItemsName, ItemsCost, ItemsType)
+    task.wait()
+    Remote.EqumentItemsShop:FireServer(ItemsName, ItemsCost, ItemsType)
+end
+
+function MouseButtonBuy(ItemsName, ItemsCost, ItemsType)
+    task.wait()
+    Remote.ShopBuy:FireServer(ItemsName,ItemsCost, ItemsType)
 end
 
 function TweenIngredients(Ingredients)
@@ -70,89 +78,69 @@ function TweenIngredients(Ingredients)
     end
 end
 
-function BuyItems(ItemsTable,Ingredient)
-    if _G.PData.BaseSettings.Coin == ItemsTable.Cost then
-        ButtonBuy.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[1]
-        ButtonBuy.ButtonDown.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[2]
-        ButtonBuy.ButtonDown.TextButton.Text = "Equip"
-    else
-        
-        if Ingredient then
-            for NumberNamePredmet, QuantItems in pairs(ItemsTable.Ingredients) do
-                for PDataNumberIndex, ItemsQuantPData in pairs(_G.PData.Inventory) do
-                    if NumberNamePredmet == PDataNumberIndex then
-                        for vi, items in next, FrameGlobule.ItemsProductAdd.UpFrame:GetChildren() do
-                            if _G.PData.Inventory[NumberNamePredmet] >= QuantItems then
-                                
-                               -- FrameGlobule.ItemsProductAdd.UpFrame.Item1.TextLabel.TextColor3 = TableColorNofficalMSG.Colors.Variant2[1]
-                            else
-                                --FrameGlobule.ItemsProductAdd.UpFrame.Item1.TextLabel.TextColor3 = TableColorNofficalMSG.Colors.Variant1[1]
-                            end
-                        end
-                    end
-                end
-            end
-        end
-
-        ButtonBuy.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant1[1]
-        ButtonBuy.ButtonDown.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant1[2]
-        ButtonBuy.ButtonDown.TextButton.Text = "No Equip"
-    end
-end
-
-function updateItemDisplay(ItemsTable, showIngredients)
-    BuyItems(ItemsTable, showIngredients)
+function updateItemDisplay(ItemsTable, showIngredients, NameItems, tableIndex)
     TweenIngredients(showIngredients)
     FrameGlobule.ItemsName.ItemsNameUp.TextLabel.Text = ItemsTable.Name
     FrameGlobule.FrameTextItems.FrameTextItemsUp.TextLabel.Text = ItemsTable.Description
     FrameGlobule.ItemsCost.ItemsCostUp.TextLabel.Text = ItemsTable.Cost.." Coin"
 end
 
-function AddPredmetItems(NameItems, tableIndex, ItemsCheckIngredient)
-    for i, IndexTable in pairs(ItemsTableGame.FoodGame) do
-        for index, value in next, FrameGlobule.ItemsProductAdd.UpFrame:GetChildren() do
-            if NameItems == i then
-                --table.insert(ItemsTable,ItemsCheckIngredient,NameItems)
-                print(ItemsTablert)
-                if value:IsA('ImageLabel') then
-                    if not FrameGlobule.ItemsProductAdd.UpFrame:FindFirstChild(NameItems) and table.find(ItemsTablert,NameItems) then
-                        table.clear(ItemsTablert)
-                        local ItemsGuiAdd = ReplicatedStorage.Assert.ItemsGuiAdd:Clone()
-                        ItemsGuiAdd.Parent = FrameGlobule.ItemsProductAdd.UpFrame
-                        ItemsGuiAdd.Name = NameItems
-                        ItemsGuiAdd.TextLabel.Text = tableIndex
-                    else
-                        value:Destroy()
-                    end
-                end
-            end
-        end
-    end
-end
-
 function GetItemShop(CameraNow)
     local showIngredients = false
-    local ItemsCheckIngredient = 0
     for _, ItemsTable in pairs(ItemsModule.StartShop) do
         if CameraNow == ItemsTable.OrderShop then
             if ItemsTable.Ingredients ~= nil then
-                for i, tableIndex in pairs(ItemsTable.Ingredients) do
-                    ItemsCheckIngredient += 1
-					if ItemsCheckIngredient > 0 then
-						AddPredmetItems(i, tableIndex,ItemsCheckIngredient)
-					end
-                    if not table.find(ItemsTablert,i) then
-                        table.insert(ItemsTablert,ItemsCheckIngredient,i)
+
+                for _, indexFrame in pairs(FrameGlobule.ItemsProductAdd.UpFrame:GetChildren()) do
+                    if indexFrame:IsA("ImageLabel") then
+                        indexFrame:Destroy()
                     end
                 end
-                showIngredients = true
-            else
-                showIngredients = false
+
+                for i, tableIndex in pairs(ItemsTable.Ingredients) do
+                    showIngredients = true
+                    local ItemsGuiAdd = ReplicatedStorage.Assert.ItemsGuiAdd:Clone()
+                    ItemsGuiAdd.Parent = FrameGlobule.ItemsProductAdd.UpFrame
+                    ItemsGuiAdd.Name = i
+                    ItemsGuiAdd.TextLabel.Text = "x"..tableIndex
+
+                    if _G.PData.BaseSettings.Coin == ItemsTable.Cost and _G.PData.EquipmentShop[ItemsTable.Name] == true and  _G.PData.Inventory[i] >= tableIndex then
+                        ButtonBuy.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[1]
+                        ButtonBuy.ButtonDown.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[2]
+                        ButtonBuy.ButtonDown.TextButton.Text = "Equip"
+                        ButtonBuy.ButtonDown.TextButton.MouseButton1Click:Connect(function()
+                            MouseButtonBuy(ItemsTable.Name, ItemsTable.Cost)
+                        end)
+                    elseif _G.PData.BaseSettings.Coin == ItemsTable.Cost and _G.PData.EquipmentShop[ItemsTable.Name] ~= true and  _G.PData.Inventory[i] >= tableIndex then
+                        ButtonBuy.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[1]
+                        ButtonBuy.ButtonDown.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant2[2]
+                        ButtonBuy.ButtonDown.TextButton.Text = "Purchase"
+                        ButtonBuy.ButtonDown.TextButton.MouseButton1Click:Connect(function()
+                            MouseButtonEqument(ItemsTable.Name, ItemsTable.Cost, ItemsTable.Type)
+                        end)
+                    else
+                        ButtonBuy.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant1[1]
+                        ButtonBuy.ButtonDown.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant1[2]
+                        ButtonBuy.ButtonDown.TextButton.Text = "No Equip"
+                    end
+
+                    if _G.PData.Inventory[i] == tableIndex then
+                        ItemsGuiAdd.TextLabel.TextColor3 = TableColorNofficalMSG.Colors.Variant2[1]
+                    elseif not _G.PData.Inventory[i] then
+                        ItemsGuiAdd.TextLabel.TextColor3 = TableColorNofficalMSG.Colors.Variant1[1]
+                    elseif _G.PData.Inventory[i] > tableIndex then
+                        ItemsGuiAdd.TextLabel.TextColor3 = TableColorNofficalMSG.Colors.Variant2[1]
+                    else
+                        ItemsGuiAdd.TextLabel.TextColor3 = TableColorNofficalMSG.Colors.Variant1[1]
+                    end
+
+
+                end
             end
             updateItemDisplay(ItemsTable, showIngredients)
-        end
-           
+        end 
     end
+    
 end
 
 function NubShop:OpenShop(ShopMini)
@@ -175,7 +163,6 @@ UserInputService.InputBegan:Connect(function(input, GPE) -- появление
                 Controls:Disable()
                 Cam.CameraType = Enum.CameraType.Scriptable
                 TweenService:Create(Cam, TweenInfo.new(0.4, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {CFrame = CameraFolder.CameraShopMini.Cam1.CFrame}):Play()
-                GetItemShop(CameraNow)
             elseif input.KeyCode == Enum.KeyCode.E and _G.PData.BaseFakeSettings.OpenShopPlayer then
                 CameraNow = 1
 				_G.PData.BaseFakeSettings.OpenShopPlayer = false

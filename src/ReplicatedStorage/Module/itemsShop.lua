@@ -28,10 +28,10 @@ ItemsShop.StartShop = {
         OrderShop = 3,
         
         ['Ingredients'] = {
-            Send = 2,
-            Rock = 4,
-            Strabbery = 225,
-            Flower = 225,
+            Send = 1,
+            Rock = 1,
+            Strabbery = 1,
+            Flower = 1,
         }
 
       

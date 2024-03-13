@@ -26,7 +26,7 @@ function Data.new(Player)
 	}
 	
 	PData.BaseSettings = { 
-		Coin = 0,
+		Coin = 5000,
         Pollen = 0,
         Tutorial = false
 	}
@@ -68,6 +68,7 @@ function Data.new(Player)
 		['Rock'] = 15,
 		['Flower'] = 15,
 		['Gold Egg'] = 1,
+		['Serk'] = 1
 	}
 
 	PData.Equipment = {
@@ -80,6 +81,18 @@ function Data.new(Player)
         RGuard = "",
 		LGuard = "",
 		Parachute = "" 
+	}
+
+	PData.EquipmentShop = {
+		Tools = {["Scissors"] = true},
+        Bags ={["Backpack"] = true},
+		Boots = {},
+        Belts = {},
+        Hats = {},
+        Gloves = {},
+        RGuards = {},
+		LGuards = {},
+		Parachutes = {},
 	}
 
 	PData.TimerTable = {
@@ -170,6 +183,10 @@ function GetDataFromDataStorage(Client, DataStorage)
 
 	for i,v in pairs(DataStorage.GameSettings) do
 		PData.GameSettings[i] = DataStorage.GameSettings[i]
+	end
+
+	for i,v in pairs(DataStorage.EquipmentShop) do
+		PData.EquipmentShop[i] = DataStorage.EquipmentShop[i]
 	end
 
 	for i,v in pairs(DataStorage.BoostPollen) do

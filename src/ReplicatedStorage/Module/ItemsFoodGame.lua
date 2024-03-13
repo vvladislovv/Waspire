@@ -12,7 +12,13 @@ ItemsGame.FoodGame = {
         Description = "",
         Type = ""
     },
-    ['Strabbery'] = {
+
+    ['Serk'] = {
+        Texture = "",
+        Description = "",
+        Type = ""
+    },
+    ['Straberry'] = {
         Texture = "",
         Description = "",
         Type = ""
