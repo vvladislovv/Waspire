@@ -1,6 +1,11 @@
 local CameraType = {}
 local runService = game:GetService("RunService")
 
+local Players = game:GetService("Players")
+local direction
+local speed = 7
+local camera = workspace.CurrentCamera
+local mouse = Players.LocalPlayer:GetMouse()
 local character = script.Parent.Parent
 local humanoid = character:WaitForChild("Humanoid")
 

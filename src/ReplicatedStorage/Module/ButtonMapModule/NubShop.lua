@@ -118,7 +118,7 @@ function GetItemShop(CameraNow)
                         ButtonBuy.ButtonDown.TextButton.MouseButton1Click:Connect(function()
                             MouseButtonEqument(ItemsTable.Name, ItemsTable.Cost, ItemsTable.Type)
                         end)
-                    else
+                    elseif _G.PData.BaseSettings.Coin ~= ItemsTable.Cost and _G.PData.EquipmentShop[ItemsTable.Name] ~= true and  _G.PData.Inventory[i] ~= tableIndex then
                         ButtonBuy.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant1[1]
                         ButtonBuy.ButtonDown.BackgroundColor3 = TableColorNofficalMSG.Colors.Variant1[2]
                         ButtonBuy.ButtonDown.TextButton.Text = "No Equip"
@@ -176,6 +176,31 @@ UserInputService.InputBegan:Connect(function(input, GPE) -- появление
         end
     end
 end)
+
+
+coroutine.wrap(function()
+	for _, btn in next, UI.Shop:GetChildren() do
+        if btn.Name == "ButtonBuy" or btn.Name == "ButtonLeft" or btn.Name == "ButtonRight" then
+        print('fff')
+            local buttonSizeX = btn.Size.X.Scale
+            local buttonSizeY = btn.Size.Y.Scale
+
+            btn.MouseEnter:Connect(function()
+                local newSizeX = (buttonSizeX + 0.01) --// Change this to what you like
+                local newSizeY = (buttonSizeY + 0.01) --// Change this to what you like
+
+                local info = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+                TweenService:Create(btn, info, {Size = UDim2.new(newSizeX, 0, newSizeY, 0)}):Play()
+            end)
+
+            btn.MouseLeave:Connect(function()
+                local info = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
+                TweenService:Create(btn, info, {Size = UDim2.new(buttonSizeX, 0, buttonSizeY, 0)}):Play()
+            end)
+        end
+    end
+end)()
+
 
 ButtonRight.ButtonDown.TextButton.MouseButton1Click:Connect(RightShopButton)
 ButtonLeft.ButtonDown.TextButton.MouseButton1Click:Connect(LeftShopButton)

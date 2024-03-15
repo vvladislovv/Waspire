@@ -102,7 +102,9 @@ function NewHive(IndexHive) -- Взаимодействие с кнопкой
                 if input.KeyCode == Enum.KeyCode.E and HiveStart == 0 then
                     HiveStart = 1
                     _G.PData.BaseFakeSettings.HiveNumberOwner = IndexHive.Name
-                    --ButtonCheckClient(IndexHive)
+                   -- TweenService:Create(IndexHive.Platform.Up.Indecator.Button.ButtonE, TweenInfo.new(1, Enum.EasingStyle.Linear,Enum.EasingDirection.In),{ImageColor3 =Color3.fromRGB(170, 170, 170)}):Play()
+                   -- task.wait(0.3)
+                    --TweenService:Create(IndexHive.Platform.Up.Indecator.Button.ButtonE, TweenInfo.new(1, Enum.EasingStyle.Linear,Enum.EasingDirection.In),{ImageColor3 =Color3.fromRGB(255, 255, 255)}):Play()
                     Remote.HiveOwner:FireServer(IndexHive,HiveFolder)
                     Remote.HiveSettings:FireServer(IndexHive)
                     Remote.HiveSpawnSlot:FireServer(IndexHive)
