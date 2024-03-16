@@ -77,7 +77,7 @@ function Data.new(Player)
 		Boot = "Basic Boots",
         Belt = "Basic Belt",
         Hat = "Basic Hat",
-        Gloves = "",
+		Glove = "Basic Glove",
         RGuard = "",
 		LGuard = "",
 		Parachute = "" 
@@ -89,7 +89,7 @@ function Data.new(Player)
 		Boots = {['Basic Boots'] = true},
         Belts = {['Basic Belt'] = true},
         Hats = {['Basic Hat'] = true},
-        Gloves = {},
+		Gloves = {['Basic Glove'] = true},
         RGuards = {},
 		LGuards = {},
 		Parachutes = {},

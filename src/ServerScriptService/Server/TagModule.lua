@@ -5,7 +5,6 @@ local nametag = ReplicatedStorage.Assert.NameTag
 
 game.Players.PlayerAdded:Connect(function(player)
 	player.CharacterAdded:Connect(function(char)
-
 		local Head = char:WaitForChild("Head")
 		local newtext = nametag:Clone() --Cloning the text.
 		local uppertext = newtext.UpperText

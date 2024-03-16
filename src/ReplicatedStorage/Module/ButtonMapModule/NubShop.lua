@@ -181,7 +181,6 @@ end)
 coroutine.wrap(function()
 	for _, btn in next, UI.Shop:GetChildren() do
         if btn.Name == "ButtonBuy" or btn.Name == "ButtonLeft" or btn.Name == "ButtonRight" then
-        print('fff')
             local buttonSizeX = btn.Size.X.Scale
             local buttonSizeY = btn.Size.Y.Scale
 

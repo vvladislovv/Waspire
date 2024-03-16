@@ -10,7 +10,7 @@ local Settings={
 	["NormalSpeed"]=16; -- Default WalkSpeed of Player
 	["SprintSpeed"]=25; -- Speed While Sprinting
 	["NormalFov"]=70; -- Default Field of View of Player
-	["SprintFov"]=82; -- Sprinting Field of View of Player
+	["SprintFov"]=85; -- Sprinting Field of View of Player
 }
 --[[]]--
 local function StartSprinting()

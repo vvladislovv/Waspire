@@ -7,9 +7,9 @@ local humanoid = character:WaitForChild("Humanoid")
 local lfoot = character:WaitForChild("HeelRight")
 local rfoot = character:WaitForChild("HeelLeft")
 --getting the particle effects
-local ef1 = game.ReplicatedStorage:WaitForChild('walkk').ef:Clone()
+local ef1 = game.ReplicatedStorage.Assert:WaitForChild('walkk').ef:Clone()
 ef1.Parent = rfoot
-local ef3 = game.ReplicatedStorage:WaitForChild('walkk').ef:Clone()
+local ef3 = game.ReplicatedStorage.Assert:WaitForChild('walkk').ef:Clone()
 ef3.Parent = lfoot
 --checking if the humanoid is running 
 humanoid.Running:Connect(function(speed)

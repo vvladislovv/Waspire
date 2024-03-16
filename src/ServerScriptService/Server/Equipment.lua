@@ -32,7 +32,7 @@ function EquipmentModule:LoadItems(Player, PData, Character)
     EquipmentModule:EquipItemsGame(Character, "Parachute", PData)
     EquipmentModule:EquipItemsGame(Character, "RGuard", PData)
     EquipmentModule:EquipItemsGame(Character, "LGuard", PData)
-    EquipmentModule:EquipItemsGame(Character, "Glove", PData)
+	EquipmentModule:EquipItemsGame(Character, "Glove", PData)
     EquipmentModule:EquipItemsGame(Character, "Hat", PData)
     EquipmentModule:EquipItemsGame(Character, "Tool", PData)
     EquipmentModule:EquipItemsGame(Character, "Bag", PData)
@@ -72,17 +72,17 @@ function EquipmentModule:EquipItemsGame(Character, TypeItem, PData)
                     ItemObj2 = Items:WaitForChild(TypeItem)[Item.."R"]:Clone()
                     Humanoid:AddAccessory(ItemObj1)
                     Humanoid:AddAccessory(ItemObj2)
-                    ItemObj1.Name = "Boot"
-                    ItemObj2.Name = "Boot"
+					ItemObj1.Name = "BootL"
+					ItemObj2.Name = "BootR"
                     end
-            elseif TypeItem == "Glove" then
-                if Item ~= "" then
-                    ItemObj1 = Items:WaitForChild(TypeItem)[Item.."L"]:Clone()
-                    ItemObj2 = Items:WaitForChild(TypeItem)[Item.."R"]:Clone()
+			elseif TypeItem == "Glove" then
+				if Item ~= "" then
+					ItemObj1 = Items:WaitForChild(TypeItem)[Item.."L"]:Clone()
+					ItemObj2 = Items:WaitForChild(TypeItem)[Item.."R"]:Clone()
                     Humanoid:AddAccessory(ItemObj1)
-                    Humanoid:AddAccessory(ItemObj2)
-                    ItemObj1.Name = "Glove"
-                    ItemObj2.Name = "Glove"
+					Humanoid:AddAccessory(ItemObj2)
+					ItemObj1.Name = "GloveL"
+					ItemObj2.Name = "GloveR"
                     end
                 else
 
