@@ -63,6 +63,36 @@ FieldGenerator.FieldSettings = {
             ThreeW = 0,
         },
     },
+    ["Cave1"] = {
+        Flowers = {
+            MinB = 4,
+            TwoB = 0,
+            ThreeB = 0,
+
+            MinR = 4,
+            TwoR = 0,
+            ThreeR = 0,
+
+            MinW = 4,
+            TwoW = 0,
+            ThreeW = 0,
+        },
+    },
+    ["Cave2"] = {
+        Flowers = {
+            MinB = 4,
+            TwoB = 0,
+            ThreeB = 0,
+
+            MinR = 4,
+            TwoR = 0,
+            ThreeR = 0,
+
+            MinW = 4,
+            TwoW = 0,
+            ThreeW = 0,
+        },
+    },
 }
 
 

@@ -11,6 +11,7 @@ local BottalCoin = require(script.Parent.ButtonMapModule.BottalCoin)
 local Leaderboard = require(script.Parent.ButtonMapModule.leaderboard)
 local WatherEventModule = require(script.Parent.ButtonMapModule.WeatherModule)
 local SnailModuleShop = require(script.Parent.ButtonMapModule.SnailModuleShop)
+local GoCaveEnd = require(script.Parent.ButtonMapModule.GoCaveEnd)
 
 local Remote = ReplicatedStorage:WaitForChild('Remote')
 local Libary = ReplicatedStorage.Libary
@@ -23,14 +24,13 @@ local TableSettings = {
     ShopCocoon = false,
     ShopCooking = false,
     GoCave = false,
+    GoCaveEnd = false,
     BottalCoin = false,
     Leaderboard = false,
     WatherEvent = false,
     SnailModuleShop = false
 }
 _G.PData = Remote.GetDataSave:InvokeServer()
-
-
 
 
 function ButtonDistation(Distation, Button, indexShop)
@@ -47,10 +47,15 @@ function ButtonDistation(Distation, Button, indexShop)
             TableSettings.ShopCooking = true
             ShopCooking:OpenShop(TableSettings.ShopCooking)
         elseif indexShop.Name == "QuestMosquito"then
-            ButtonQuestMosquito()
+        elseif indexShop.Name == "CocoonIncubator"then
+        elseif indexShop.Name == "ShopTime"then
+        elseif indexShop.Name == "QusetGusinets"then
         elseif indexShop.Name == "ShopSnail" then
             TableSettings.SnailModuleShop = true
             SnailModuleShop:OpenShop(TableSettings.SnailModuleShop)
+        elseif indexShop.Name == "GoCaveEnd" then
+            TableSettings.GoCaveEnd = true
+            GoCaveEnd:OpenShop(TableSettings.GoCaveEnd)
         elseif indexShop.Name == "GoCave" then
             TableSettings.GoCave = true
             GoCave:OpenShop(TableSettings.GoCave)
@@ -66,11 +71,16 @@ function ButtonDistation(Distation, Button, indexShop)
             TableSettings.BottalCoin = true
             BottalCoin:OpenShop(TableSettings.BottalCoin)
         end
+
+
     elseif Distation > 10 then
         TweenModule:SizeBasicButtonClose(Button)
         if indexShop.Name == "ShopMiniButton" then
             TableSettings.ShopMini = false
             NubShop:OpenShop(TableSettings.ShopMini)
+        elseif indexShop.Name == "GoCaveEnd" then
+            TableSettings.GoCaveEnd = false
+            GoCaveEnd:OpenShop(TableSettings.GoCaveEnd)
         elseif indexShop.Name == "ShopCocoon" then
             TableSettings.ShopCocoon = false
             CocnShop:OpenShop(TableSettings.ShopCocoon)
@@ -98,22 +108,6 @@ function ButtonDistation(Distation, Button, indexShop)
 end
 
 
-
-function ButtonShopEgg()
-    print('ButtonShopEgg')
-end
-
-function ButtonQuestMosquito()
-   print('ButtonQuestMosquito')
-end
-
-function ButtonShopSnail()
-    print('ButtonShopSnail')
-end
-
-function ButtonGoCave()
-    print('ButtonGoCave')
-end
 
 for _, indexShop in next, ButtonFolder:GetChildren() do
     task.spawn(function()

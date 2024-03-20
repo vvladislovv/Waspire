@@ -20,7 +20,11 @@ function Tween:CloseNoffical(Noffical)
 end
 
 function Tween:TransparencyBlack(FrameBlackTeleport)
-    TweenService:Create(FrameBlackTeleport, TweenInfo.new(0.8, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {Transparency = 0}):Play()
+    TweenService:Create(FrameBlackTeleport, TweenInfo.new(1.5, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {Transparency = 0}):Play()
+end
+
+function Tween:OffTransparencyBlack(FrameBlackTeleport)
+    TweenService:Create(FrameBlackTeleport, TweenInfo.new(1.5, Enum.EasingStyle.Linear,Enum.EasingDirection.InOut), {Transparency = 1}):Play()
 end
 
 return Tween

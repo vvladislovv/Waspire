@@ -26,4 +26,11 @@ function Utils:FormatTime(Seconds)
     end
 end
 
+function Utils:CommaNumber(Num)
+    Num = tostring(Num)
+    return Num:reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
+end
+
+
+
 return Utils
