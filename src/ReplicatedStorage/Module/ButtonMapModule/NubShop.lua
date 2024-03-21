@@ -23,7 +23,7 @@ local Remote = ReplicatedStorage:WaitForChild('Remote')
 _G.PData = Remote.GetDataSave:InvokeServer()
 
 local ItemsModule = require(script.Parent.Parent.itemsShop)
-local ItemsTableGame = require(script.Parent.Parent.ItemsFoodGame)
+local ItemsTableGame = require(script.Parent.Parent.ItemsGame)
 
 local Cam = game.Workspace.CurrentCamera
 local CamOriginal = nil

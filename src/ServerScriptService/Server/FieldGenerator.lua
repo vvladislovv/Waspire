@@ -4,17 +4,17 @@ local FieldGenerator = {}
 
 FieldGenerator.MaxFloderSize = 3
 FieldGenerator.FlowerTexture = {
-    ["1Blue"] = "rbxassetid://16791141597",
-    ["2Blue"] = "rbxassetid://11522571767",
-    ["3Blue"] = "rbxassetid://11522571767",
+    ["1Blue"] = "rbxassetid://16804666619",
+    ["2Blue"] = "rbxassetid://16804670208",
+    ["3Blue"] = "rbxassetid://16804672980",
     
-    ["1Red"] = "rbxassetid://16791143104",
-    ["2Red"] = "rbxassetid://11522571767",
-    ["3Red"] = "rbxassetid://11522571767",
+    ["1Pupler"] = "rbxassetid://16804647138",
+    ["2Pupler"] = "rbxassetid://16804650053",
+    ["3Pupler"] = "rbxassetid://16804651100",
 
     ["1White"] = "rbxassetid://16791144157",
-    ["2White"] = "rbxassetid://11522571767",
-    ["3White"] = "rbxassetid://11522571767",
+    ["2White"] = "rbxassetid://16804620887",
+    ["3White"] = "rbxassetid://16804623294",
 }
 FieldGenerator.Flowers = {}
 FieldGenerator.FieldSettings = {
@@ -24,9 +24,9 @@ FieldGenerator.FieldSettings = {
             TwoB = 0,
             ThreeB = 0,
 
-            MinR = 4,
-            TwoR = 0,
-            ThreeR = 0,
+            MinP = 4,
+            TwoP = 0,
+            ThreeP = 0,
 
             MinW = 4,
             TwoW = 0,
@@ -39,9 +39,9 @@ FieldGenerator.FieldSettings = {
             TwoB = 0,
             ThreeB = 0,
 
-            MinR = 4,
-            TwoR = 0,
-            ThreeR = 0,
+            MinP = 4,
+            TwoP = 0,
+            ThreeP = 0,
 
             MinW = 4,
             TwoW = 0,
@@ -54,9 +54,9 @@ FieldGenerator.FieldSettings = {
             TwoB = 0,
             ThreeB = 0,
 
-            MinR = 4,
-            TwoR = 0,
-            ThreeR = 0,
+            MinP = 4,
+            TwoP = 0,
+            ThreeP = 0,
 
             MinW = 4,
             TwoW = 0,
@@ -69,9 +69,9 @@ FieldGenerator.FieldSettings = {
             TwoB = 0,
             ThreeB = 0,
 
-            MinR = 4,
-            TwoR = 0,
-            ThreeR = 0,
+            MinP = 4,
+            TwoP = 0,
+            ThreeP = 0,
 
             MinW = 4,
             TwoW = 0,
@@ -84,9 +84,9 @@ FieldGenerator.FieldSettings = {
             TwoB = 0,
             ThreeB = 0,
 
-            MinR = 4,
-            TwoR = 0,
-            ThreeR = 0,
+            MinP = 4,
+            TwoP = 0,
+            ThreeP = 0,
 
             MinW = 4,
             TwoW = 0,
@@ -108,8 +108,8 @@ function TextInType(FN)
         end
 
         -- Color Flower
-        if string.find(FN, "R") then
-            Type["Color"] = "Red"
+        if string.find(FN, "P") then
+            Type["Color"] = "Pupler"
         elseif string.find(FN, "B") then
             Type["Color"] = "Blue"
         elseif string.find(FN, "W") then

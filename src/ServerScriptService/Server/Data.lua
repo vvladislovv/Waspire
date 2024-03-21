@@ -28,6 +28,7 @@ function Data.new(Player)
 	PData.BaseSettings = { 
 		Coin = 5000,
         Pollen = 0,
+		Capacity = 0,
         Tutorial = false
 	}
 
@@ -80,7 +81,7 @@ function Data.new(Player)
 		Glove = "Basic Glove",
         RGuard = "",
 		LGuard = "",
-		Parachute = "" 
+		Parachute = ""
 	}
 
 	PData.EquipmentShop = {
