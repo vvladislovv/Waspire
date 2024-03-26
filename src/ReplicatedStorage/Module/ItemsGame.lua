@@ -45,18 +45,26 @@ ItemsGame.Equipment = {
     Tool = {
         ['Scissors'] = {
             Name = "Scissors",
-            Pollen = 3,
+            SpeedCoper = 0.75,
+            Collecting = 3,
             Coouldown = 0.2,
-            Power = 0.3,
-            Stamps = "ScissModel",
+            PowerTools = 0.3,
+            BlockFieldCoper = "2x1",
+            Stamp = "ScissModel",
+            Color = "None",
+            AnimTools = "rbxassetid://522635514"
         },
 
         ['loler'] = {
             Name = "loler",
-            Pollen = 3,
+            Collecting = 3,
+            SpeedCoper = 0.75,
             Coouldown = 0.2,
-            Power = 0.3,
+            PowerTools = 0.3,
+            BlockFieldCoper = "2x1",
             Stamps = "lolerModel",
+            Color = "None",
+            AnimTools = "rbxassetid://522635514"
         },
     },
 }

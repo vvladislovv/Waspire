@@ -37,6 +37,7 @@ function Data.new(Player)
         CoinTotal = 0,
         PollenTotal = 0,
         WaspTotal = 0,
+		
     }
 
     PData.Hive = {
@@ -45,8 +46,19 @@ function Data.new(Player)
         RolingWasp = 0,
     }
 
-    PData.BoostPollen  = {
-        ['Banana'] = 100
+    PData.PlayerBoost  = {
+		["Pollen"] = 100,
+		["Pupler Pollen"] = 100,
+		["White Pollen"] = 100,
+		["Blue Pollen"] = 100,
+		
+		["Instant"] = 0,
+		["Red Instant"] = 0,
+		["White Instant"] = 0,
+		["Blue Instant"] = 0,
+		["Pollen From Collectors"] = 100,
+		["Collectors Speed"] = 100,
+		["Critical Power"] = 100,
     }
 
 	PData.QuestTaskNPC = {}
@@ -190,8 +202,8 @@ function GetDataFromDataStorage(Client, DataStorage)
 		PData.EquipmentShop[i] = DataStorage.EquipmentShop[i]
 	end
 
-	for i,v in pairs(DataStorage.BoostPollen) do
-		PData.BoostPollen[i] = DataStorage.BoostPollen[i]
+	for i,v in pairs(DataStorage.PlayerBoost) do
+		PData.PlayerBoost[i] = DataStorage.PlayerBoost[i]
 	end
 
 	for i,v in pairs(DataStorage.Settings) do

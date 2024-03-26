@@ -122,6 +122,9 @@ function EquipmentModule:EquipItemsGame(Character, TypeItem, PData)
                         Humanoid:AddAccessory(ItemObj1)
                     elseif TypeItem == "Tool" then
                         ItemObj1.Name = "Tool"
+                        local CollectScript = game.ServerStorage.Tools:Clone()
+                        CollectScript.Parent = ItemObj1
+                        print(ItemObj1)
                         Humanoid:AddAccessory(ItemObj1)
                     end
                 end

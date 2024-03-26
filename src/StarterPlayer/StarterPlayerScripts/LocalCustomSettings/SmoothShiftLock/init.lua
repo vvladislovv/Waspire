@@ -68,7 +68,6 @@ function SmoothShiftLock:Init()
 
 	managerMaid:GiveTask(LocalPlayer.CharacterAdded:Connect(function()
 		self:CharacterAdded();
-		print('ffff')
 	end));
 end;
 
