@@ -150,7 +150,7 @@ function FieldGenerator:CreateFlower(Flower)
         Color = FlowerColor,
         RegenFlower = 0.5,
         MaxP = Flower.Position.Y,
-        MinP = Flower.Position.Y - 2,
+        MinP = Flower.Position.Y - 2.5,
     }
     Flower.TopTexture.Texture = FieldGenerator.FlowerTexture[FieldGenerator.Flowers[ID].Stat.Value..FieldGenerator.Flowers[ID].Color] -- Size; Color
 end

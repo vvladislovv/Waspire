@@ -127,23 +127,24 @@ function FlowerCollect:CollectFlower(Player, Args)
     end
 end
 
-Remote.PollenEffect.OnClientEvent:Connect(function(plr, Pollen)
-    Pollen.ParticleEmitter.Enabled = true
-    task.wait(0.1)
-    Pollen.ParticleEmitter.Enabled = false
-end)
-
-Remote.RegenPollen.OnClientEvent:Connect(function(Player,Pollen,FlowerPos)
+Remote.RegenPollen.OnClientEvent:Connect(function(Pollen,FlowerPos)
     TweenService:Create(Pollen, TweenInfo.new(5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = FlowerPos}):Play()
 end)
 
-Remote.RegenPollen2.OnClientEvent:Connect(function(Player,Pollen,FlowerPosTime)
+Remote.RegenPollen2.OnClientEvent:Connect(function(Pollen,FlowerPosTime)
     TweenService:Create(Pollen, TweenInfo.new(5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = FlowerPosTime}):Play()
 end)
 
-Remote.FlowerDown.OnClientEvent:Connect(function(plr,Flower,DecAm)
+Remote.FlowerDown.OnClientEvent:Connect(function(Flower,DecAm)
     local FlowerPos = Flower.Position - Vector3.new(0,DecAm,0)
     TweenService:Create(Flower, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = FlowerPos}):Play()
+    Flower.Changed:Connect(function()
+        Flower.ParticleEmitter.Enabled = true
+        task.wait(0.1)
+        Flower.ParticleEmitter.Enabled = false
+    end)
         --TW:Create(Flower.TopTexture, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Transparency = (FieldGame.Flowers[Flower.FlowerID.Value].MaxP-Flower.Position.Y)/2.5}):Play()
 end)
+
+
 return FlowerCollect

@@ -46,19 +46,21 @@ function Data.new(Player)
         RolingWasp = 0,
     }
 
-    PData.PlayerBoost  = {
-		["Pollen"] = 100,
-		["Pupler Pollen"] = 100,
-		["White Pollen"] = 100,
-		["Blue Pollen"] = 100,
-		
-		["Instant"] = 0,
-		["Red Instant"] = 0,
-		["White Instant"] = 0,
-		["Blue Instant"] = 0,
-		["Pollen From Collectors"] = 100,
-		["Collectors Speed"] = 100,
-		["Critical Power"] = 100,
+    PData.Boost  = {
+		PlayerBoost = {
+			["Pollen"] = 100,
+			["Pupler Pollen"] = 100,
+			["White Pollen"] = 100,
+			["Blue Pollen"] = 100,
+			
+			["Instant"] = 0,
+			["Red Instant"] = 0,
+			["White Instant"] = 0,
+			["Blue Instant"] = 0,
+			["Pollen From Collectors"] = 100,
+			["Collectors Speed"] = 100,
+			["Critical Power"] = 100,
+		}
     }
 
 	PData.QuestTaskNPC = {}
@@ -202,8 +204,8 @@ function GetDataFromDataStorage(Client, DataStorage)
 		PData.EquipmentShop[i] = DataStorage.EquipmentShop[i]
 	end
 
-	for i,v in pairs(DataStorage.PlayerBoost) do
-		PData.PlayerBoost[i] = DataStorage.PlayerBoost[i]
+	for i,v in pairs(DataStorage.Boost) do
+		PData.Boost[i] = DataStorage.Boost[i]
 	end
 
 	for i,v in pairs(DataStorage.Settings) do
