@@ -1,5 +1,5 @@
-local ServerStorage = game:GetService("ServerStorage")
-
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote = ReplicatedStorage:WaitForChild('Remote')
 local FieldGenerator = {}
 
 FieldGenerator.MaxFloderSize = 3
@@ -148,7 +148,7 @@ function FieldGenerator:CreateFlower(Flower)
     FieldGenerator.Flowers[ID] = {
         Stat = FlowerType,
         Color = FlowerColor,
-        RegenFlower = 0.5,
+        RegenFlower = 0.65,
         MaxP = Flower.Position.Y,
         MinP = Flower.Position.Y - 2.5,
     }
@@ -156,7 +156,7 @@ function FieldGenerator:CreateFlower(Flower)
 end
 
 function FieldGenerator:FlowerCreatINField(Field, Position)
-    local FlowerClose = ServerStorage.Assets.Flower:Clone()
+    local FlowerClose = ReplicatedStorage.Assert.Flower:Clone()
     FlowerClose.Parent = Field
     FlowerClose.CFrame = Position
     
@@ -190,10 +190,22 @@ function FieldGenerator:GenerateField(FlowerZoneP)
             end
         end
 end
-	
-for _, Fields in pairs(workspace.FieldFolderStudio:GetChildren()) do
-    print(Fields)
-	FieldGenerator:GenerateField(Fields)
+
+function FieldGenerator:GetField(Field)
+	if game:GetService("RunService"):IsServer() then
+		return FieldGenerator
+	else
+		return Remote.GetField:InvokeServer()
+	end
 end
 
+game.ReplicatedStorage.Remote.GetField.OnServerInvoke = function(client)
+    local PData = FieldGenerator:GetField(client)
+    return PData
+end
+
+
+for _, Fields in pairs(workspace.FieldFolderStudio:GetChildren()) do
+    FieldGenerator:GenerateField(Fields)
+end
 return FieldGenerator

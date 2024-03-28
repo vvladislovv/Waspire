@@ -52,7 +52,7 @@ function Data.new(Player)
 			["Pupler Pollen"] = 100,
 			["White Pollen"] = 100,
 			["Blue Pollen"] = 100,
-			
+			["Critical Chance"] = 100,
 			["Instant"] = 0,
 			["Red Instant"] = 0,
 			["White Instant"] = 0,

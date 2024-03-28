@@ -50,7 +50,6 @@ local Coouldown = {}
 
 function CollectFlowerClient(AnimTrack, HRP)
     if _G.PData.BaseSettings.Pollen <= _G.PData.BaseSettings.Capacity and not Coouldown[Player.Name] then
-        print('aaa')
         Coouldown[Player.Name] = true
         task.wait(AnimTrack.Length-0.8)
 
@@ -77,8 +76,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		AnimTrack.Priority = Enum.AnimationPriority.Action
 		AnimTrack:Play()
 		
-
-        print('ffffasdfa')
 		CollectFlowerClient(AnimTrack,HRP)
 		task.wait(Cooldown)
 		Debonuce = false

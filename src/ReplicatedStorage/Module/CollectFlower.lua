@@ -1,40 +1,43 @@
 local FlowerCollect = {}
-
 local Player = game.Players.LocalPlayer
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 local Remote = ReplicatedStorage:WaitForChild('Remote')
 _G.PData = Remote.GetDataSave:InvokeServer()
+_G.Field = Remote.GetField:InvokeServer()
 
+local TablePlayerFlower = {}
+local Item = require(ReplicatedStorage.Module.ItemsGame)
 
 function GetRotation(Character, Orientation)
     local HOrient = Character.PrimaryPart.Orientation
 
     if HOrient.Magnitude >= 50 and HOrient.Magnitude < 110 then
-        Orientation = CFrame.Angles(0, math.rad(90), 0)
+		Orientation = CFrame.Angles(0, math.rad(90), 0)
+	end
 
+	if HOrient.Magnitude > -90 and HOrient.Magnitude < 90 then
+		Orientation = CFrame.Angles(0, math.rad(-90), 0)
+	end
 
-    elseif HOrient.Magnitude > -90 and HOrient.Magnitude < 90 then
-        Orientation = CFrame.Angles(0, math.rad(-90), 0)
+	if HOrient.Magnitude > 0 and HOrient.Magnitude < 50 then
+		Orientation = CFrame.Angles(0, math.rad(0), 0)
+	end
 
+	if HOrient.Magnitude <= 110 and HOrient.Magnitude >= 180 then
+		Orientation = CFrame.Angles(0, math.rad(-90), 0)
+	end
 
-    elseif HOrient.Magnitude > 0 and HOrient.Magnitude < 50 then
-        Orientation = CFrame.Angles(0, math.rad(-180), 0)
-
-
-    elseif HOrient.Magnitude <= 110 and HOrient.Magnitude >= 180 then
-        Orientation = CFrame.Angles(0, math.rad(0), 0)
-
-
-    elseif HOrient.Magnitude > 110 and HOrient.Magnitude < 180 then
-        Orientation = CFrame.Angles(0, math.rad(0), 0)
-    end
+	if HOrient.Magnitude > 110 and HOrient.Magnitude < 180 then
+		Orientation = CFrame.Angles(0, math.rad(-180), 0)
+	end
 
     return Orientation
 end
 
+
+
 function FlowerCollect:CollectFlower(Player, Args)
-    print(Args)
     local Character = workspace:FindFirstChild(Player.Name)
     local ModelStamp = ReplicatedStorage.FolderStamps[Args.Stamp]:Clone()
     ModelStamp.Parent = workspace.StampsWorksSpawn
@@ -97,7 +100,6 @@ function FlowerCollect:CollectFlower(Player, Args)
                         if part.name == "Flower" then
                             if not table.find(Flowers, part) then
                                 table.insert(Flowers, part)
-                                print('ff')
                                 Remote.CollectField:FireServer(_G.PData, part, Args.HRP, nil, ModelStamp.PrimaryPart)
                                 task.wait(0.1)
                                 ModelStamp:Destroy()
@@ -113,10 +115,8 @@ function FlowerCollect:CollectFlower(Player, Args)
                 if not table.find(Flowers, part) then
                     table.insert(Flowers, part)
                     if Args.StatsMOD then
-                        print('ff')
                         Remote.CollectField:FireServer(_G.PData, part, Args.HRP, nil, ModelStamp.PrimaryPart)
                     else
-                        print('ff')
                         Remote.CollectField:FireServer(_G.PData, part, Args.HRP, nil, ModelStamp.PrimaryPart)
                     end
                     task.wait(0.1)
@@ -127,24 +127,43 @@ function FlowerCollect:CollectFlower(Player, Args)
     end
 end
 
-Remote.RegenPollen.OnClientEvent:Connect(function(Pollen,FlowerPos)
-    TweenService:Create(Pollen, TweenInfo.new(5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = FlowerPos}):Play()
-end)
+function FlowerCollect:RegenUp(Field : Instance)
+    local InfoFieldGame = _G.Field[Field.Name]
+        task.spawn(function()
+            while Field do task.wait(5)
+                for i, Pollen in pairs(Field:GetChildren()) do
+                    if Pollen:IsA("BasePart") then
+                    InfoFieldGame = _G.Field.Flowers[Pollen.FlowerID.Value]
+                        if Pollen.Position.Y < InfoFieldGame.MaxP then
+                            local ToMaxFlower = tonumber(InfoFieldGame.MaxP - Pollen.Position.Y)
+                            local FlowerPos = Pollen.Position + Vector3.new(0, ToMaxFlower, 0)
+                            local FlowerPosTime = Pollen.Position + Vector3.new(0,InfoFieldGame.RegenFlower,0)
 
-Remote.RegenPollen2.OnClientEvent:Connect(function(Pollen,FlowerPosTime)
-    TweenService:Create(Pollen, TweenInfo.new(5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = FlowerPosTime}):Play()
-end)
+                            if ToMaxFlower < InfoFieldGame.RegenFlower then
+                                Pollen.ParticleEmitter.Enabled = false
+                                TweenService:Create(Pollen, TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = FlowerPos}):Play()
+                            else
+                                Pollen.ParticleEmitter.Enabled = false
+                                TweenService:Create(Pollen, TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = FlowerPosTime}):Play()
+                            end
+                        end
+                    end 
+                end
+            end
+        end)
+end
 
 Remote.FlowerDown.OnClientEvent:Connect(function(Flower,DecAm)
     local FlowerPos = Flower.Position - Vector3.new(0,DecAm,0)
-    TweenService:Create(Flower, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = FlowerPos}):Play()
-    Flower.Changed:Connect(function()
-        Flower.ParticleEmitter.Enabled = true
-        task.wait(0.1)
-        Flower.ParticleEmitter.Enabled = false
-    end)
-        --TW:Create(Flower.TopTexture, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Transparency = (FieldGame.Flowers[Flower.FlowerID.Value].MaxP-Flower.Position.Y)/2.5}):Play()
+    TweenService:Create(Flower, TweenInfo.new(0.7, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = FlowerPos}):Play()
+    Flower.ParticleEmitter.Enabled = true
+    task.wait(0.25)
+    Flower.ParticleEmitter.Enabled = false
 end)
+
+for _, Field in pairs(workspace.FieldsGame:GetChildren()) do
+    FlowerCollect:RegenUp(Field)
+end
 
 
 return FlowerCollect
