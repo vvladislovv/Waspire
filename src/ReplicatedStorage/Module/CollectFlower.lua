@@ -11,7 +11,6 @@ local Item = require(ReplicatedStorage.Module.ItemsGame)
 
 function GetRotation(Character, Orientation)
     local HOrient = Character.PrimaryPart.Orientation
-
     if HOrient.Magnitude >= 50 and HOrient.Magnitude < 110 then
 		Orientation = CFrame.Angles(0, math.rad(90), 0)
 	end
@@ -29,7 +28,7 @@ function GetRotation(Character, Orientation)
 	end
 
 	if HOrient.Magnitude > 110 and HOrient.Magnitude < 180 then
-		Orientation = CFrame.Angles(0, math.rad(-180), 0)
+		Orientation = CFrame.Angles(0, math.rad(180), 0)
 	end
 
     return Orientation

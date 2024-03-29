@@ -96,7 +96,7 @@ Remote.CollectField.OnServerEvent:Connect(function(Player, PData, Flower, Positi
             local CoinAdd = 0
 
             if FoodAm ~= nil and Percent ~= nil then -- Percent ~= nil
-                local Convert = math.round(FoodAm * (Percent / 100)) -- 
+                local Convert = math.round(FoodAm * (Percent / 100)) --
                 local PollenAdd = math.round(FoodAm - Convert)
 
                 local CritRandom = math.random(1,100)
@@ -119,18 +119,17 @@ Remote.CollectField.OnServerEvent:Connect(function(Player, PData, Flower, Positi
                 end
 
                 task.spawn(function()
-                    task.wait()
+                    task.wait(0.001)
                     if TablePlayerFlower[Player.Name] ~= nil then
                         for i,v in pairs(TablePlayerFlower[Player.Name]) do
                                 if v > 0 then
-                                    print(TablePlayerFlower)
                                    Remote.VisualNumber:FireClient(Player, {Pos = Stamp, Amt = v, Color = i, Crit = Crit})
                                 end
                             end
 
                             TablePlayerFlower[Player.Name].Coin = 0
                             TablePlayerFlower[Player.Name].Blue = 0
-                            TablePlayerFlower[Player.Name].Red = 0
+                            TablePlayerFlower[Player.Name].Pupler = 0
                             TablePlayerFlower[Player.Name].White = 0
                     end
                 end)
