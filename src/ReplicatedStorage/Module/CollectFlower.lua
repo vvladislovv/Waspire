@@ -3,6 +3,7 @@ local Player = game.Players.LocalPlayer
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 local Remote = ReplicatedStorage:WaitForChild('Remote')
+local Zone = require(game.ReplicatedStorage:WaitForChild('Zone'))
 _G.PData = Remote.GetDataSave:InvokeServer()
 _G.Field = Remote.GetField:InvokeServer()
 
@@ -33,8 +34,6 @@ function GetRotation(Character, Orientation)
 
     return Orientation
 end
-
-
 
 function FlowerCollect:CollectFlower(Player, Args)
     local Character = workspace:FindFirstChild(Player.Name)
@@ -164,5 +163,17 @@ for _, Field in pairs(workspace.FieldsGame:GetChildren()) do
     FlowerCollect:RegenUp(Field)
 end
 
+
+for _, v in next, workspace.FieldsGame:GetChildren() do
+    local Zone = Zone.new(v)
+    Zone.playerEntered:Connect(function(Player)
+        _G.PData.BaseFakeSettings.FieldVars = v.Name
+        _G.PData.BaseFakeSettings.FieldVarsOld = v.Name
+    end)
+
+    Zone.playerExited:Connect(function(Player)
+        _G.PData.BaseFakeSettings.FieldVars = ""
+    end)
+end
 
 return FlowerCollect

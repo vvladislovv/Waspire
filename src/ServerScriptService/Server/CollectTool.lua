@@ -8,9 +8,7 @@ local TokensModule = require(game.ServerScriptService.Server.TokenSystems)
 local FieldGame = require(game.ServerScriptService.Server.FieldGenerator)
 local DataSave = require(game.ServerScriptService.Server.Data)
 local Item = require(ReplicatedStorage.Module.ItemsGame)
-local Zone = require(ServerScriptService.Zone)
 local Remote = ReplicatedStorage:WaitForChild('Remote')
-
 local StampsWorksSpawn = workspace.StampsWorksSpawn
 --print(TablePlayerFlower)
 --PData = game.ReplicatedStorage.Remotes.GetDataSave:InvokeServer()
@@ -19,17 +17,16 @@ local moduleFlower = {}
 
 function RToken(Field)
     local Data = Item.FieldsDrop[Field]
-    local TotalWeight = 0
+    local TotalWeight = 500
 
-    for i,v in pairs(Data) do
-        TotalWeight += v.Rarity
-    end
     local Chance = math.random(1, TotalWeight)
     local coun = 0
     for i,v in pairs(Data) do
-        coun += v.Rarity
-        if coun >= Chance then
+        coun += math.random(1, TotalWeight/6)
+        if coun > Chance then
             return v.Name
+        else
+            return nil
         end
     end
 end
@@ -45,12 +42,10 @@ end)
 Remote.CollectField.OnServerEvent:Connect(function(Player, PData, Flower, Position, StatsMOD, Stamp)
     if Flower and PData and (Flower.Position.Y - FieldGame.Flowers[Flower.FlowerID.Value].MinP) > 0.2 then
         local CanScoop = true
-
         if PData.BaseSettings.Pollen <= PData.BaseSettings.Capacity and CanScoop == true then
             local Type = PData.Equipment.Tool
             local Crit = false
             local FieldName = PData.BaseFakeSettings.FieldVars -- не видет 
-            print(FieldName)
             local FColor = FieldGame.Flowers[Flower.FlowerID.Value].Color
             local FSize = FieldGame.Flowers[Flower.FlowerID.Value].Stat.Value
             local SS, DecAm, FoodAm
@@ -114,7 +109,6 @@ Remote.CollectField.OnServerEvent:Connect(function(Player, PData, Flower, Positi
                 end
             end
             Remote.FlowerDown:FireAllClients(Flower,DecAm)
-            
             local CoinAdd = 0
 
             if FoodAm ~= nil and Percent ~= nil then -- Percent ~= nil
@@ -134,15 +128,13 @@ Remote.CollectField.OnServerEvent:Connect(function(Player, PData, Flower, Positi
                 end
 
                 CoinAdd += Convert
-
-                local FieldGrant = math.random(1,300)
-                print(FieldGrant)
-                print(Item.FieldsDrop)
-                print(FieldName)
-                if FieldGrant <= 100 then
+                
+                local FieldGrant = math.random(1,500)
+                if FieldGrant <= 300 then
                     if Item.FieldsDrop[FieldName] then
                         local RandomToken = RToken(FieldName)
-                        print(FieldGrant)
+                        if RandomToken ~= nil then
+                            print(RandomToken)
                             TokensModule.SpawnToken({
                                 Position = Flower.Position,
                                 Cooldown = 15,
@@ -151,8 +143,9 @@ Remote.CollectField.OnServerEvent:Connect(function(Player, PData, Flower, Positi
                                     Amount = 1,
                                     Type = "Drop",
                                 },
-                                Resourse = PData.BaseFakeSettings.FieldVars.." Field",
+                                Resourse = FieldName.." Field",
                             })
+                        end
                     end
                 end
 
@@ -193,6 +186,7 @@ Remote.CollectField.OnServerEvent:Connect(function(Player, PData, Flower, Positi
         end
     end
 end)
+
 
 
 return moduleFlower

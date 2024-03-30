@@ -28,15 +28,16 @@ end
 
 Remote.Token.OnClientEvent:Connect(function(Token)
 	local Deb = false
+
 	if Token then
 
 	task.spawn(function()
-		local T1 = ts:Create(Token, TweenInfo.new(4), {Transparency = 1})
-		local T2 = ts:Create(Token:FindFirstChild("BackDecal"), TweenInfo.new(4), {Transparency = 1})
-		local T3 = ts:Create(Token:FindFirstChild("FrontDecal"), TweenInfo.new(4), {Transparency = 1})
+		local T1 = ts:Create(Token, TweenInfo.new(8), {Transparency = 1})
+		local T2 = ts:Create(Token:FindFirstChild("BackDecal"), TweenInfo.new(8), {Transparency = 1})
+		local T3 = ts:Create(Token:FindFirstChild("FrontDecal"), TweenInfo.new(8), {Transparency = 1})
 
 		ts:Create(Token, TweenInfo.new(0.65, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out,0.3), {Size = Vector3.new(0.5, 3, 3)}):Play()
-		ts:Create(Token, TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, -1, false), {CFrame = Token.CFrame * CFrame.fromEulerAnglesXYZ(0, math.rad(180), 0)}):Play()
+		ts:Create(Token, TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, -1, false), {CFrame = Token.CFrame * CFrame.fromEulerAnglesXYZ(0, math.rad(180), 0)}):Play()
 		
         task.spawn(function()
 			task.wait(15)
@@ -58,12 +59,6 @@ Remote.Token.OnClientEvent:Connect(function(Token)
 			if Hit.Parent:FindFirstChild("Humanoid") and game.Players:FindFirstChild(Hit.Parent.Name) and Deb == false then
 				Deb = true
 				Token.CanTouch = false
-
-				if Token:FindFirstChild("TokenCollect") then
-					Token.TokenCollect:Play()
-				else
-					Token.Sound:Play()
-				end
 
                 T1:Pause()
                 T2:Pause()

@@ -131,7 +131,7 @@ VisEv.OnClientEvent:Connect(function(Tab)
 		else
 			VP.Position = Character.PrimaryPart.Position
 		end
-		VP.Position += Vector3.new(0,0,0)
+		VP.Position += Vector3.new(0,2,0)
 		ray(VP)
 		VP.BillboardGui.TextPlayer.Text = "+"..Utils:CommaNumber(Tab.Amt)
 		VP.BillboardGui.TextPlayer.TextColor3 = TableCollers[Tab.Color]
@@ -149,8 +149,8 @@ VisEv.OnClientEvent:Connect(function(Tab)
 		-- Если монеты или удары пока, что не нужны 
 	end
 
-	task.wait(0.4)
+	task.wait(0.5)
 	TS:Create(VP.BillboardGui.TextPlayer, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0)}):Play()
-	task.wait(0.4)
+	task.wait(0.25)
 	VP:Destroy()
 end)
