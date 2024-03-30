@@ -1,5 +1,0 @@
-local TokenSystems = {}
-
-
-
-return TokenSystems

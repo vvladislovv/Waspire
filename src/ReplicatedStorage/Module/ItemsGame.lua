@@ -69,6 +69,63 @@ ItemsGame.Equipment = {
     },
 }
 
+ItemsGame.TokenTables = {
+    TokenDrop = {
+        ["Coin"] = {
+			TKColor = Color3.fromRGB(240, 208, 92),
+			Image = "http://www.roblox.com/asset/?id=10315383929",
+		},
+        ["Basic Egg"] = {
+			TKColor = Color3.fromRGB(240, 208, 92),
+			Image = "",
+		},
+        ["Gold Egg"] = {
+			TKColor = Color3.fromRGB(240, 208, 92),
+			Image = "",
+		},
+        ["Dimoind Egg"] = {
+			TKColor = Color3.fromRGB(240, 208, 92),
+			Image = "",
+		},
+        ["Event Egg"] = {
+			TKColor = Color3.fromRGB(240, 208, 92),
+			Image = "",
+		},
+        ["Strawberry"] = {
+			TKColor = Color3.fromRGB(197, 197, 197),
+			Image = "",
+		},
+        ["Leaf"] = {
+			TKColor = Color3.fromRGB(197, 197, 197),
+			Image = "",
+		},
+        ["Seed"] = {
+			TKColor = Color3.fromRGB(197, 197, 197),
+			Image = "",
+		},
+        ["Blueberry"] = {
+			TKColor = Color3.fromRGB(197, 197, 197),
+			Image = "",
+		},
+    },
+}
 
+ItemsGame.FieldsDrop = {
+    ["Daisies"] = {
+        ['Coin'] = {Name = "Coin", Rarity = 15, APT = 1}
+    },
+    ["Blue flowers"] = {
+        ['Coin'] = {Name = "Coin", Rarity = 15, APT = 1}
+    },
+    ["Mushrooms"] = {
+        ['Coin'] = {Name = "Coin", Rarity = 15, APT = 1}
+    },
+    ["Cave2"] = {
+        ['Coin'] = {Name = "Coin", Rarity = 15, APT = 1}
+    },
+    ["Cave1"] = {
+        ['Coin'] = {Name = "Coin", Rarity = 15, APT = 1}
+    }
+}
 
 return ItemsGame

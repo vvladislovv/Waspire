@@ -10,7 +10,7 @@ function BottalCoinData(Player, MathNumber, NofficalBottle)
     if NofficalBottle then
         PData.BaseSettings.Coin += MathNumber
         PData.TimerTable["BottalCoin"] = {Time = 14400 + os.time()}
-        PData:Update('TimerTable', PData.TimerTable)
+        --PData:Update('TimerTable', PData.TimerTable)
     else
         print(PData)
     end
@@ -20,7 +20,7 @@ function TutorialCheck(Player, Perment)
     local PData = Data:Get(Player)
     if Perment then
         PData.GameSettings.SnailTutorial = true
-        PData:Update('GameSettings', PData.GameSettings)
+        --PData:Update('GameSettings', PData.GameSettings)
     end
 end
 

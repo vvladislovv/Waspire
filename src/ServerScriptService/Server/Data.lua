@@ -16,8 +16,9 @@ function Data.new(Player)
 	PData.BaseFakeSettings = {
 		HiveOwner = "",
 		HiveNumberOwner = "",
-		OpenShopPlayer = false
-		
+		OpenShopPlayer = false,
+		FieldVars = "",
+		FieldVarsOld = ""
 	}
 
 	PData.GameSettings = {
@@ -29,6 +30,7 @@ function Data.new(Player)
 		Coin = 5000,
         Pollen = 0,
 		Capacity = 0,
+		DailyHoney = 0,
         Tutorial = false
 	}
 
@@ -60,6 +62,7 @@ function Data.new(Player)
 			["Pollen From Collectors"] = 100,
 			["Collectors Speed"] = 100,
 			["Critical Power"] = 100,
+			["Honey From Tokens"] = 100,
 		}
     }
 
@@ -157,8 +160,8 @@ end
 
 local AutoSaves = {}
 
-local MainKey = 'DataMainServerAlifa1s1a2s4'
-local ClientKey = 'DataMainClientAlifa1s1a2s4'
+local MainKey = 'DataMainServerAlifa1s1a2s6'
+local ClientKey = 'DataMainClientAlifa1s1a2s6'
 
 local DataStore2 = require(game.ServerScriptService.DataStore2)
 
