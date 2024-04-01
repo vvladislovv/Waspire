@@ -14,6 +14,8 @@ function Data.new(Player)
 	PData.Loaded = false
 
 	PData.BaseFakeSettings = {
+		Attack = false,
+		objAttack = nil,
 		HiveOwner = "",
 		HiveNumberOwner = "",
 		OpenShopPlayer = false,

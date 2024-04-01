@@ -128,4 +128,23 @@ ItemsGame.FieldsDrop = {
     }
 }
 
+ItemsGame.Monster = {
+    ['Ladibag'] = {
+        Field = "Mushrooms",
+        Level = 1,
+        HP = 25,
+        SettingsMobs = {
+            Speed = 15,
+            Damage = 15,
+            Dist = 50
+        },
+
+        Reward = {
+            ['Coin'] = math.random(200,1000),
+            ['Mushrooms'] = math.random(1, 25),
+            ['Basic Egg'] = math.random(1, 10000) -- если это от 50 до 100 то выдать яйцо
+        }
+    }
+}
+
 return ItemsGame

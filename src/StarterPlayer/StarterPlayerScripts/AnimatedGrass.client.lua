@@ -1,3 +1,4 @@
+--[[
 local PS = game:GetService('Players')
 local CLS = game:GetService('CollectionService')
 local RPS = game:GetService('ReplicatedStorage')
@@ -393,4 +394,4 @@ for i,player in (PS:GetPlayers()) do
 	if (player.Character) then
 		characterAdded(player.Character)
 	end
-end
+end]]
