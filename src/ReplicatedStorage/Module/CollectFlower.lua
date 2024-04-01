@@ -1,5 +1,8 @@
 local FlowerCollect = {}
 local Player = game.Players.LocalPlayer
+local character = Player.Character or Player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local PlayerGui = Player:WaitForChild("PlayerGui")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 local Remote = ReplicatedStorage:WaitForChild('Remote')
@@ -163,16 +166,25 @@ for _, Field in pairs(workspace.FieldsGame:GetChildren()) do
     FlowerCollect:RegenUp(Field)
 end
 
-
 for _, v in next, workspace.FieldsGame:GetChildren() do
     local Zone = Zone.new(v)
     Zone.playerEntered:Connect(function(Player)
         _G.PData.BaseFakeSettings.FieldVars = v.Name
-        _G.PData.BaseFakeSettings.FieldVarsOld = v.Name
+        PlayerGui:WaitForChild("UI").TextFieldLocation.Text = v.Name.." Field"
+        if _G.PData.BaseFakeSettings.GuiField == false and _G.PData.BaseFakeSettings.FieldVarsOld ~= v.Name then
+            _G.PData.BaseFakeSettings.GuiField = true
+            _G.PData.BaseFakeSettings.FieldVarsOld = v.Name
+            TweenService:Create(PlayerGui.UI.TextFieldLocation, TweenInfo.new(1, Enum.EasingStyle.Back,Enum.EasingDirection.Out), {Position = UDim2.new(0.33, 0,0.863, 0)}):Play()
+            task.wait(3)
+            TweenService:Create(PlayerGui.UI.TextFieldLocation, TweenInfo.new(2, Enum.EasingStyle.Back,Enum.EasingDirection.Out), {Position = UDim2.new(0.33, 0,2, 0)}):Play()
+        end
     end)
 
     Zone.playerExited:Connect(function(Player)
         _G.PData.BaseFakeSettings.FieldVars = ""
+        --TweenService:Create(PlayerGui.UI.TextFieldLocation, TweenInfo.new(2, Enum.EasingStyle.Back,Enum.EasingDirection.Out), {Position = UDim2.new(0.33, 0,2, 0)}):Play()
+        task.wait(1.5)
+        _G.PData.BaseFakeSettings.GuiField = false
     end)
 end
 

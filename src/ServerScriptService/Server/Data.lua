@@ -18,6 +18,7 @@ function Data.new(Player)
 		HiveNumberOwner = "",
 		OpenShopPlayer = false,
 		FieldVars = "",
+		GuiField = false,
 		FieldVarsOld = ""
 	}
 
