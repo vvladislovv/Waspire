@@ -11,11 +11,58 @@ local Billboard = ReplicatedStorage.Assert.BillboardGui
 local Config = ReplicatedStorage.Assert.Configuration
 local MosterModule = {}
 
+function TokenSpawn()
+    
+end
 
-function UpdateGui(Mob, Congig, Player, Field)
-    Config.HP.Changed:Connect(function(Health)
+function MosterModule.GetRewards(Mob, Player, Field)
+    local PData = Data:Get(Player)
+    for i,v in pairs(TableMosnter.Monster['Ladibag'].Reward) do
+        print(i)
+        print(v)
+        if i ~= "Battle Points" then
+            local Chance = math.random(1,10000)
+            if Chance <= v.Chance then
+                local Amt
+
+                if type(v.Amt) == "table" then -- Проверка на таблицу
+                    Amt = math.random(1, #v.Amt)
+                else
+                    Amt = v.Amt + math.random(1, #v.Amt)
+                end
+                PData[v.Type][i] += Amt
+                TokenSpawn()
+            end
+        else
+            print('fff')
+        end
+    end
+end
+
+function MosterModule.WaspAttack()
+    
+end
+
+function UpdateGui(Mob, Configuration, Player, Field)
+    Configuration.HP.Changed:Connect(function(Health)
         if Mob and Mob.PrimaryPart then
             Mob.PrimaryPart:FindFirstChild("BG").Bar.TextLabel.Text = "HP:"..Health
+            Mob.PrimaryPart:FindFirstChild("BG").Bar.FB.Size = UDim2.new(Configuration.HP.Value / Configuration.MaxHP.Value,0,1,0)
+            
+            if Health <= 0 then
+                local PData = Data:Get(Player)
+                if PData.BaseFakeSettings.Attack then
+                    PData.BaseFakeSettings.Attack = false
+                    MosterModule.GetRewards(Mob, Player, Field) -- Написать
+
+                    Mob:FindFirstChild('PositionObj'):Destroy()
+                    if Mob.PimaryPart then
+                        Mob.PimaryPart:FindFirstChild('BG').Enabled = false
+                    end
+                    task.wait(0.5)
+                    Mob:Destroy()
+                end
+            end
         end
     end)
 end
@@ -38,13 +85,14 @@ function MosterModule.CreateMobs(Player, Field)
             Configuration.Parent = Mob
             Configuration.Player.Value = Player.Name
             Configuration.HP.Value = TableMosnter.Monster[Field].HP
+            Configuration.MaxHP.Value = TableMosnter.Monster[Field].HP
             Configuration.Level.Value = TableMosnter.Monster[Field].Level
 
 
             local BillboardGui = Billboard:Clone()
             BillboardGui.Parent = Mob.PimaryPart
             BillboardGui.MobName.Text = Mob.Name.." (Lvl "..Configuration.Level.Value..")"
-            BillboardGui.Bar.TextLabel.Text = "HP:"..Configuration.HP.Value
+            BillboardGui.Bar.TextLabel.Text = "HP:"..Configuration.MaxHP.Value
             BillboardGui.Bar.FB.Size = UDim2.new(1,0,1,0)
             BillboardGui.Name = "BG"
             BillboardGui.StudsOffsetWorldSpace = Vector3.new(0,Mob.PrimaryPart.Size.Y, 0)
@@ -100,6 +148,6 @@ function MosterModule:StartZone()
         end)
     end
 end
-
+MosterModule.GetRewards()
 
 return MosterModule

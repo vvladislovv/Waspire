@@ -95,50 +95,66 @@ ItemsShop.StartShop = {
             Flower = 225,
         }
     },  
+
     ['Product8'] = {
+        Name = "Basic Glove",
+        Cost = 4500,
+        Capacity = 2500,
+        ShopType = "ShopMiniButton",
+        Type = "Glove",
+        Description = "///",
+        OrderShop = 8,
+        ['Ingredients'] = {
+            Rock = 5,
+            Strabbery = 325,
+            Flower = 525,
+        }
+    },
+    ['Product9'] = {
         Name = "Testtube",
         Cost = 4500,
         Capacity = 2500,
         ShopType = "ShopMiniButton",
         Type = "Bag",
         Description = "///",
-        OrderShop = 8,
+        OrderShop = 9,
         ['Ingredients'] = {
             Rock = 4,
             Strabbery = 225,
             Flower = 225,
         }
     },
-    ['Product9'] = {
+
+    ['Product10'] = {
         Name = "Hiking Backpack",
         Cost = 12000,
         Capacity = 5000,
         ShopType = "ShopMiniButton",
         Type = "Bag",
         Description = "///",
-        OrderShop = 9,
+        OrderShop = 10,
         ['Ingredients'] = {
             Strabbery = 225,
             Flower = 225,
         }
     },
-    ['Product10'] = {
+    ['Product11'] = {
         Name = "Bag",
         Cost = 1500,
         Capacity = 1000,
         ShopType = "ShopMiniButton",
         Type = "Bag",
         Description = "///",
-        OrderShop = 10
+        OrderShop = 11
     },
-    ['Product11'] = {
+    ['Product12'] = {
         Name = "Backpack",
         Cost = 0,
         Capacity = 150,
         ShopType = "ShopMiniButton",
         Type = "Bag",
         Description = "///",
-        OrderShop = 11
+        OrderShop = 12
     },
 
 }

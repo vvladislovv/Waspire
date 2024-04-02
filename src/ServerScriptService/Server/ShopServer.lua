@@ -12,13 +12,10 @@ end
 
 function BuyItemsEqument(plr, ItemsName, ItemsCost, ItemsType)
     local PData = DataSave:Get(plr)
-    print(PData.EquipmentShop)
-    print(PData.Equipment)
     PData.Equipment[ItemsType] = ItemsName
     PData.EquipmentShop[ItemsType.."s"][ItemsName] = true
-    PData:Update('EquipmentShop', PData.EquipmentShop)
-    PData:Update('Equipment', PData.Equipment)
-    print(PData.EquipmentShop)
+    --PData:Update('EquipmentShop', PData.EquipmentShop)
+   -- PData:Update('Equipment', PData.Equipment)
 end
 
 Remote.EqumentItemsShop.OnServerEvent:Connect(BuyItemsEqument)

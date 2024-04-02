@@ -140,9 +140,27 @@ ItemsGame.Monster = {
         },
 
         Reward = {
-            ['Coin'] = math.random(200,1000),
-            ['Mushrooms'] = math.random(1, 25),
-            ['Basic Egg'] = math.random(1, 10000) -- если это от 50 до 100 то выдать яйцо
+            ['Coin'] = {
+                Amt = 50, -- Умножать
+                Chance = 1000,
+                Type = "BaseSettings"
+            },
+            ['Mushrooms'] = {
+                Amt = 1,
+                Chance = 100,
+                Type = "Inventory"
+            },
+            ['Basic Egg'] = {
+                Amt = 1,
+                Chance = 1000000,
+                Type = "Inventory"
+            },
+            ['Battle Points'] = {
+                Amt = 5, -- Умножать
+                Chance = 1000,
+                Type = "BaseSettings"
+            },
+
         }
     }
 }

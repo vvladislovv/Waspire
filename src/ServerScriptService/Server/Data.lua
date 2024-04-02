@@ -105,8 +105,8 @@ function Data.new(Player)
 	}
 
 	PData.EquipmentShop = {
-		Tools = {["Scissors"] = true},
-        Bags ={["Backpack"] = true},
+		Tools = {['Scissors'] = true},
+        Bags ={['Backpack'] = true},
 		Boots = {['Basic Boots'] = true},
         Belts = {['Basic Belt'] = true},
         Hats = {['Basic Hat'] = true},
