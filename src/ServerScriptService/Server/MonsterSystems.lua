@@ -12,7 +12,7 @@ local Billboard = ReplicatedStorage.Assert.BillboardGui
 local Config = ReplicatedStorage.Assert.Configuration
 local MosterModule = {}
 
-function TokenSpawn(Player, Amt, tableReward,tableReward2,StartVector3, amountofitems,Arclength)
+function MosterModule.TokenSpawn(Player, Amt, tableReward,tableReward2,StartVector3, amountofitems,Arclength)
 
     local AngleBetweenInDegrees = 360/amountofitems
 	local AngleBetweenInRad = math.rad(AngleBetweenInDegrees)
@@ -60,20 +60,20 @@ function MosterModule.GetRewards(Mob, Player, Field)
                 end
                 if RewardNumber == 3 then
                     TokenRadios = 6
-                    TokenSpawn(Player,Amt,v,i, Mob, RewardNumber, TokenRadios)
+                    MosterModule.TokenSpawn(Player,Amt,v,i, Mob, RewardNumber, TokenRadios)
                 elseif RewardNumber > 3 then
                     TokenRadios = 8
-                    TokenSpawn(Player,Amt,v,i, Mob, RewardNumber, TokenRadios)
+                    MosterModule.TokenSpawn(Player,Amt,v,i, Mob, RewardNumber, TokenRadios)
                 elseif RewardNumber > 8 then
                     TokenRadios = 10
-                    TokenSpawn(Player,Amt,v,i, Mob, RewardNumber, TokenRadios)
+                    MosterModule.TokenSpawn(Player,Amt,v,i, Mob, RewardNumber, TokenRadios)
                 elseif RewardNumber < 15 then
                     TokenRadios = 12
-                    TokenSpawn(Player,Amt,v,i, Mob, RewardNumber. TokenRadios)
+                    MosterModule.TokenSpawn(Player,Amt,v,i, Mob, RewardNumber. TokenRadios)
                 end
             end
         else
-            print('fff')
+            -- Добавить к бейджу
         end
     end
 end
@@ -82,7 +82,7 @@ function MosterModule.WaspAttack()
     
 end
 
-function UpdateGui(Mob, Configuration, Player, Field)
+function MosterModule.UpdateGui(Mob, Configuration, Player, Field)
     Configuration.HP.Changed:Connect(function(Health)
         if Mob and Mob.PrimaryPart then
             Mob.PrimaryPart:FindFirstChild("BG").Bar.TextLabel.Text = "HP:"..Health
@@ -142,7 +142,7 @@ function MosterModule.CreateMobs(Player, Field)
                 MosterModule.WaspAttack() -- Написать 
             end
 
-            UpdateGui(Mob, Configuration, Player, Field) -- Дописать
+            MosterModule.UpdateGui(Mob, Configuration, Player, Field) -- Дописать
         end
     end
 
@@ -187,6 +187,6 @@ function MosterModule:StartZone()
         end)
     end
 end
-MosterModule.GetRewards()
+--MosterModule.GetRewards()
 
 return MosterModule

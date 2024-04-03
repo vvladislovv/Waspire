@@ -1,0 +1,3 @@
+local QuestModule = {}
+
+return QuestModule
