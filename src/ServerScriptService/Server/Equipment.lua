@@ -1,7 +1,7 @@
 -- Дописать скрипт баг парфель на бошке
 
 local EquipmentModule = {}
-
+--[[
 local PhysicsService = game:GetService("PhysicsService")
 local Player = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -131,6 +131,6 @@ function EquipmentModule:EquipItemsGame(Character, TypeItem, PData)
            end
         end
     end
-end
+end]]
 
 return EquipmentModule

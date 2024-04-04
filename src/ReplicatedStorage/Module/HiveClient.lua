@@ -130,7 +130,7 @@ function NewHive(IndexHive) -- Взаимодействие с кнопкой
         end
     end)
 end
-BeanCheckGame(Player.Character, HiveFolder)
+--BeanCheckGame(Player.Character, HiveFolder)
 for _, IndexHive in next, HiveFolder:GetChildren() do
 
     task.spawn(function()

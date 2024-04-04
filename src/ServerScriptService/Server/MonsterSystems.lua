@@ -78,9 +78,52 @@ function MosterModule.GetRewards(Mob, Player, Field)
     end
 end
 
-function MosterModule.WaspAttack()
+function WaitUntilReached(BeeModel, Magnitude)
+    if BeeModel and BeeModel:FindFirstChild("Body") then
+		repeat task.wait()
+            if not BeeModel or not BeeModel:FindFirstChild("Body") or not BeeModel:FindFirstChild("Positioner") then 
+                break 
+            end
+		until (BeeModel.Body.Position - BeeModel.Positioner.Position).Magnitude <= (Magnitude or 0.7)
+	else
+		return
+	end
+end
+
+function Animate(Mob)
     
 end
+
+function RotationToPlayer(Mob, Rotation, Player)
+    
+end
+
+function MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack)
+    Animate(Mob)
+    RotationToPlayer(Mob, Rotation, Player)
+
+    task.spawn(function()
+        while true do
+            task.wait()
+            if Mob:FindFirstChild("PositionObj") then
+                if game.Workspace:FindFirstChild(Player.Name) then
+                    local Character = game.Workspace:FindFirstChild(Player.Name)
+                    local PositionObj = Mob:FindFirstChild("PositionObj")
+                    local Flowers = workspace.FieldsGame[Field.Name]:GetChildren() -- получаем цветы
+                    local Flower = Flowers[math.random(1, #Flowers)]
+                    local PData = Data:Get(Player)
+
+                    task.spawn(function()
+                        5
+                    end)
+
+                end
+            end
+        end
+    end)
+
+end
+
 
 function MosterModule.UpdateGui(Mob, Configuration, Player, Field)
     Configuration.HP.Changed:Connect(function(Health)
@@ -109,9 +152,7 @@ end
 function MosterModule.CreateMobs(Player, Field)
     local PData = Data:Get(Player)
     for i, indexTable in pairs(TableMosnter.Monster) do
-        if  indexTable.Field == Field then
-            local Mob = ReplicatedStorage.Mobs:FindFirstChild(TableMosnter.Monster:FindFirstChild(Field)):Clone()
-
+        local Mob = ReplicatedStorage.Mobs:FindFirstChild(Field.Monster.Value):Clone()
             if not PlayerMobs:FindFirstChild(Player.Name) then -- Создаем папку для спавна монстра
                 local Folder = Instance.new("Folder", PlayerMobs)
                 Folder.Name = Player.Name
@@ -123,27 +164,28 @@ function MosterModule.CreateMobs(Player, Field)
             local Configuration = Config:Clone()
             Configuration.Parent = Mob
             Configuration.Player.Value = Player.Name
-            Configuration.HP.Value = TableMosnter.Monster[Field].HP
-            Configuration.MaxHP.Value = TableMosnter.Monster[Field].HP
-            Configuration.Level.Value = TableMosnter.Monster[Field].Level
+            Configuration.HP.Value = TableMosnter.Monster[Mob.Name].HP
+            Configuration.MaxHP.Value = TableMosnter.Monster[Mob.Name].HP
+            Configuration.Level.Value = TableMosnter.Monster[Mob.Name].Level
 
+            Mob.Parent = PlayerMobs:FindFirstChild(Player.Name)
+            Mob:MoveTo(Field:FindFirstChild("Pos").WorldPosition)
 
             local BillboardGui = Billboard:Clone()
-            BillboardGui.Parent = Mob.PimaryPart
+            BillboardGui.Parent = Mob.PrimaryPart
             BillboardGui.MobName.Text = Mob.Name.." (Lvl "..Configuration.Level.Value..")"
             BillboardGui.Bar.TextLabel.Text = "HP:"..Configuration.MaxHP.Value
             BillboardGui.Bar.FB.Size = UDim2.new(1,0,1,0)
             BillboardGui.Name = "BG"
             BillboardGui.StudsOffsetWorldSpace = Vector3.new(0,Mob.PrimaryPart.Size.Y, 0)
             BillboardGui.AlwaysOnTop = true
-            BillboardGui.MaxDistance = TableMosnter.Monster[Field].SettingsMobs.Dist * 1.5
+            BillboardGui.MaxDistance = TableMosnter.Monster[Mob.Name].SettingsMobs.Dist * 1.5
 
             if Mob.Name ~= "" then
-                MosterModule.WaspAttack() -- Написать 
+                MosterModule.MobsAttack(Mob, true, Player, Field, false)
             end
 
             MosterModule.UpdateGui(Mob, Configuration, Player, Field) -- Дописать
-        end
     end
 
 end

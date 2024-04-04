@@ -129,7 +129,7 @@ ItemsGame.FieldsDrop = {
 }
 
 ItemsGame.Monster = {
-    ['Ladibag'] = {
+    ['BagsBlue'] = {
         Field = "Mushrooms",
         Level = 1,
         HP = 25,
