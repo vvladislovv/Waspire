@@ -114,7 +114,7 @@ function MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack)
                     local PData = Data:Get(Player)
 
                     task.spawn(function()
-                        5
+                        
                     end)
 
                 end
