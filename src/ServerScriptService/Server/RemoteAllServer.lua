@@ -40,3 +40,8 @@ Remote.JumpingEffect.OnServerEvent:Connect(JumpingEffect)
 Remote.BottalCoinEvent.OnServerEvent:Connect(BottalCoinData)
 Remote.TutorialServer.OnServerEvent:Connect(TutorialCheck)
 return RemoteAllServer
+
+
+
+
+

@@ -91,11 +91,28 @@ function WaitUntilReached(BeeModel, Magnitude)
 end
 
 function Animate(Mob)
-    
+    if Mob.Name ~= "" then
+        task.spawn(function()
+            local Humanoid = Mob:FindFirstChild('Humanoid')
+        end)
+    end
 end
 
 function RotationToPlayer(Mob, Rotation, Player)
-    
+    task.spawn(function()
+        if workspace:WaitForChild(Player.Name) then
+            local Character = workspace:FindFirstChild(Player.Name)
+            if Mob:FindFirstChild('Body') then
+                local targetPosition = Character.PrimaryPart.Position
+                local CurrentPosition = Mob.Body.Position
+                
+                local lookVector = (targetPosition - CurrentPosition).unit -- Position Mob and Character
+                local upVector = Vector3.new(0,0,0)
+                print(lookVector)
+                Mob.Body.CFrame = CFrame.new(CurrentPosition, targetPosition) * CFrame.new(0, 0, 0) * CFrame.lookAt(Vector3.new(lookVector.x, 0, lookVector.z), upVector)
+            end
+        end
+    end)
 end
 
 function MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack)
@@ -114,7 +131,7 @@ function MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack)
                     local PData = Data:Get(Player)
 
                     task.spawn(function()
-                        5
+                        
                     end)
 
                 end
@@ -217,10 +234,10 @@ function MosterModule:StartZone()
                     task.spawn(function()
                         if indexMobs and indexMobs:FindFirstChild('PositionObj') then
                             indexMobs:FindFirstChild('PositionObj'):Destroy()
-                            if indexMobs.PimaryPart then
-                                indexMobs.PimaryPart:FindFirstChild('BG').Enabled = false
+                            if indexMobs.PrimaryPart then
+                                indexMobs.PrimaryPart:FindFirstChild('BG').Enabled = false
                             end
-                            task.wait(0.5)
+                            task.wait(0.1)
                             indexMobs:Destroy()
                         end
                     end)
