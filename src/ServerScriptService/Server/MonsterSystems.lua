@@ -78,63 +78,67 @@ function MosterModule.GetRewards(Mob, Player, Field)
     end
 end
 
-function WaitUntilReached(BeeModel, Magnitude)
-    if BeeModel and BeeModel:FindFirstChild("Body") then
+function WaitUntilReached(Mob, Magnituder)
+    if Mob and Mob:FindFirstChild("Body") then
 		repeat task.wait()
-            if not BeeModel or not BeeModel:FindFirstChild("Body") or not BeeModel:FindFirstChild("Positioner") then 
-                break 
+            if not Mob or not Mob:FindFirstChild("Body") or not Mob:FindFirstChild("PositionObj") then 
+                break
             end
-		until (BeeModel.Body.Position - BeeModel.Positioner.Position).Magnitude <= (Magnitude or 0.7)
+		until (Mob.Body.Position - Mob.PositionObj.Position).Magnitude <= (Magnituder or 0.7)
 	else
 		return
 	end
 end
 
-function Animate(Mob)
-    if Mob.Name ~= "" then
-        task.spawn(function()
-            local Humanoid = Mob:FindFirstChild('Humanoid')
-        end)
-    end
-end
-
 function RotationToPlayer(Mob, Rotation, Player)
     task.spawn(function()
-        if workspace:WaitForChild(Player.Name) then
-            local Character = workspace:FindFirstChild(Player.Name)
-            if Mob:FindFirstChild('Body') then
-                local targetPosition = Character.PrimaryPart.Position
-                local CurrentPosition = Mob.Body.Position
-                
-                local lookVector = (targetPosition - CurrentPosition).unit -- Position Mob and Character
-                local upVector = Vector3.new(0,0,0)
-                print(lookVector)
-                Mob.Body.CFrame = CFrame.new(CurrentPosition, targetPosition) * CFrame.new(0, 0, 0) * CFrame.lookAt(Vector3.new(lookVector.x, 0, lookVector.z), upVector)
+        while Mob do
+            task.wait()
+            if Rotation then
+                if workspace:WaitForChild(Player.Name) then
+                    local Character = workspace:FindFirstChild(Player.Name)
+                    if Mob:FindFirstChild('Body') then
+                        local targetPosition = Character.PrimaryPart.Position
+                        local CurrentPosition = Mob.Body.Position
+                        local lookVector = (targetPosition - CurrentPosition).unit -- Position Mob and Character
+                        local upVector = Vector3.new(0,0,0)
+                        --task.wait(1)
+                        --Mob:FindFirstChild("Body").BodyGyro.CFrame = CFrame.new(Mob.Body.Position, Character.PrimaryPart.Position) * CFrame.Angles(0, math.rad(180), 0)
+                        
+                        --Mob.Body.CFrame = CFrame.new(CurrentPosition, targetPosition) * CFrame.Angles(0, math.rad(180), 0)
+                        Mob:MoveTo(Character.PrimaryPart.Position)
+                    else
+                        break
+                    end
+                else
+                    Mob:Destroy()
+                    break
+                end
             end
         end
     end)
 end
 
 function MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack)
-    Animate(Mob)
-    RotationToPlayer(Mob, Rotation, Player)
+    --RotationToPlayer(Mob, Rotation, Player)
+
+    local Character = game.Workspace:FindFirstChild(Player.Name)
+    local PositionObj = Mob:FindFirstChild("PositionObj")
+    local Flowers = workspace.FieldsGame[Field.Name]:GetChildren() -- получаем цветы
+    local Flower = Flowers[math.random(1, #Flowers)]
+    local PData = Data:Get(Player)
+    local EnemyHumanoid = Mob:FindFirstChild('EnemyHumanoid')
+    local MaxSpeed = TableMosnter.Monster[Mob.Name].SettingsMobs.Speed
+    print(EnemyHumanoid)
+    local Distance = (Mob.Body.Position - Character.PrimaryPart.Position).Magnitude
 
     task.spawn(function()
         while true do
             task.wait()
-            if Mob:FindFirstChild("PositionObj") then
-                if game.Workspace:FindFirstChild(Player.Name) then
-                    local Character = game.Workspace:FindFirstChild(Player.Name)
-                    local PositionObj = Mob:FindFirstChild("PositionObj")
-                    local Flowers = workspace.FieldsGame[Field.Name]:GetChildren() -- получаем цветы
-                    local Flower = Flowers[math.random(1, #Flowers)]
-                    local PData = Data:Get(Player)
-
-                    task.spawn(function()
-                        
-                    end)
-
-                end
+            if Distance > 5 then -- только моб, а сам хуманоин нет
+				--EnemyHumanoid:MoveTo(Character.PrimaryPart.Position)
+			else
+				print('fff')
             end
         end
     end)
@@ -167,13 +171,18 @@ function MosterModule.UpdateGui(Mob, Configuration, Player, Field)
 end
 
 function MosterModule.CreateMobs(Player, Field)
-    local PData = Data:Get(Player)
-    for i, indexTable in pairs(TableMosnter.Monster) do
-        local Mob = ReplicatedStorage.Mobs:FindFirstChild(Field.Monster.Value):Clone()
-            if not PlayerMobs:FindFirstChild(Player.Name) then -- Создаем папку для спавна монстра
-                local Folder = Instance.new("Folder", PlayerMobs)
-                Folder.Name = Player.Name
-            end
+    task.spawn(function()
+        local PData = Data:Get(Player)
+        local Rotation = true
+        local Attack = false
+        for i, index in next, Field:GetChildren() do
+			if index.Name == "Pos1" or index.Name == "Pos2" then
+                local Mob = ReplicatedStorage.Mobs:FindFirstChild(Field.Monster.Value):Clone()
+                local MaxNumber 
+                if not PlayerMobs:FindFirstChild(Player.Name) then -- Создаем папку для спавна монстра
+                    local Folder = Instance.new("Folder", PlayerMobs)
+                    Folder.Name = Player.Name
+                end
 
             PData.BaseFakeSettings.Attack = true
             -- Обновить в гуи
@@ -185,8 +194,15 @@ function MosterModule.CreateMobs(Player, Field)
             Configuration.MaxHP.Value = TableMosnter.Monster[Mob.Name].HP
             Configuration.Level.Value = TableMosnter.Monster[Mob.Name].Level
 
-            Mob.Parent = PlayerMobs:FindFirstChild(Player.Name)
-            Mob:MoveTo(Field:FindFirstChild("Pos").WorldPosition)
+			Mob.Parent = PlayerMobs:FindFirstChild(Player.Name)
+            --print(index)
+			if not Field.Pos1.Spawn.Value then
+                Mob:MoveTo(Field:FindFirstChild("Pos1").WorldPosition)
+                Field.Pos1.Spawn.Value = true
+            elseif not Field.Pos2.Spawn.Value then
+                Mob:MoveTo(Field:FindFirstChild("Pos2").WorldPosition)
+                Field.Pos2.Spawn.Value = true
+            end
 
             local BillboardGui = Billboard:Clone()
             BillboardGui.Parent = Mob.PrimaryPart
@@ -198,13 +214,13 @@ function MosterModule.CreateMobs(Player, Field)
             BillboardGui.AlwaysOnTop = true
             BillboardGui.MaxDistance = TableMosnter.Monster[Mob.Name].SettingsMobs.Dist * 1.5
 
-            if Mob.Name ~= "" then
-                MosterModule.MobsAttack(Mob, true, Player, Field, false)
-            end
+            MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack)
 
             MosterModule.UpdateGui(Mob, Configuration, Player, Field) -- Дописать
-    end
 
+            end
+        end
+    end)
 end
 
 function MosterModule:StartZone()
@@ -236,6 +252,8 @@ function MosterModule:StartZone()
                             indexMobs:FindFirstChild('PositionObj'):Destroy()
                             if indexMobs.PrimaryPart then
                                 indexMobs.PrimaryPart:FindFirstChild('BG').Enabled = false
+                                v.Pos1.Spawn.Value = false
+                                v.Pos2.Spawn.Value = false
                             end
                             task.wait(0.1)
                             indexMobs:Destroy()

@@ -13,29 +13,32 @@ _G.Field = Remote.GetField:InvokeServer()
 local TablePlayerFlower = {}
 local Item = require(ReplicatedStorage.Module.ItemsGame)
 
-function GetRotation(Character, Orientation)
-    local HOrient = Character.PrimaryPart.Orientation
-    if HOrient.Magnitude >= 50 and HOrient.Magnitude < 110 then
-		Orientation = CFrame.Angles(0, math.rad(90), 0)
-	end
+function GetRotation(Character)
+    local Orientation = CFrame.Angles(0, math.rad(0), 0)
+		if Character then
+			local HOrient = Character.PrimaryPart.Orientation
 
-	if HOrient.Magnitude > -90 and HOrient.Magnitude < 90 then
-		Orientation = CFrame.Angles(0, math.rad(-90), 0)
-	end
+			if HOrient.Magnitude >= 50 and HOrient.Magnitude < 110 then
+				Orientation = CFrame.Angles(0, math.rad(90), 0)
+			end
 
-	if HOrient.Magnitude > 0 and HOrient.Magnitude < 50 then
-		Orientation = CFrame.Angles(0, math.rad(0), 0)
-	end
+			if HOrient.Magnitude > -90 and HOrient.Magnitude < 90 then
+				Orientation = CFrame.Angles(0, math.rad(-90), 0)
+			end
 
-	if HOrient.Magnitude <= 110 and HOrient.Magnitude >= 180 then
-		Orientation = CFrame.Angles(0, math.rad(-90), 0)
-	end
+			if HOrient.Magnitude > 0 and HOrient.Magnitude < 50 then
+				Orientation = CFrame.Angles(0, math.rad(-180), 0)
+			end
 
-	if HOrient.Magnitude > 110 and HOrient.Magnitude < 180 then
-		Orientation = CFrame.Angles(0, math.rad(180), 0)
-	end
+			if HOrient.Magnitude <= 110 and HOrient.Magnitude >= 180 then
+				Orientation = CFrame.Angles(0, math.rad(0), 0)
+			end
 
-    return Orientation
+			if HOrient.Magnitude > 110 and HOrient.Magnitude < 180 then
+				Orientation = CFrame.Angles(0, math.rad(0), 0)
+			end
+		end
+		return Orientation
 end
 
 function FlowerCollect:CollectFlower(Player, Args)
