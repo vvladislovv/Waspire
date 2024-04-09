@@ -78,7 +78,24 @@ function MosterModule.GetRewards(Mob, Player, Field)
     end
 end
 
-
+local function CollisionMob(Mob)
+    game:GetService("RunService").Stepped:connect(function()
+        if Mob then
+            print(Mob)
+            local head = Mob:FindFirstChild("Head")
+            local torso = Mob:FindFirstChild("UpperTorso")
+            if head then
+                    head.CanCollide = false 
+                if torso then
+                    print(torso)
+                    print(torso.CanCollide)
+                    torso.CanCollide = false
+                    print(torso.CanCollide)
+                end
+            end
+        end
+    end)         
+end
 
 function RotationToPlayer(Mob, Rotation, Player, Field)
     task.spawn(function()
@@ -88,16 +105,11 @@ function RotationToPlayer(Mob, Rotation, Player, Field)
                 if workspace:WaitForChild(Player.Name) then
                     local Character = workspace:FindFirstChild(Player.Name)
                     if Mob then
-                        -- Сделать lookAt
-                        --local lookAt = CFrame.lookAt(Mob.UpperTorso.Position, Character.HumanoidRootPart.Position)
-                        --Mob.ModelBag.Torso.CFrame = lookAt
                         Mob.Humanoid:MoveTo(Character.PrimaryPart.Position)
                     else
                        -- break
                     end
                 else
-                    --Mob:Destroy()
-                    --break
                 end
             end
         end
@@ -106,7 +118,7 @@ end
 
 function MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack)
     RotationToPlayer(Mob, Rotation, Player, Field)
-
+    --CollisionMob(Mob)
     local Character = game.Workspace:FindFirstChild(Player.Name)
     --local PositionObj = Mob:FindFirstChild("PositionObj")
     local Flowers = workspace.FieldsGame[Field.Name]:GetChildren() -- получаем цветы
@@ -153,6 +165,7 @@ function MosterModule.CreateMobs(Player, Field)
         for i, index in next, Field:GetChildren() do
 			if index.Name == "Pos1" or index.Name == "Pos2" then -- *Просмотр сколько штук есть
                 local Mob = ReplicatedStorage.Mobs:FindFirstChild(Field.Monster.Value):Clone()
+                CollisionMob(Mob)
                 if not PlayerMobs:FindFirstChild(Player.Name) then -- Создаем папку для спавна монстра
                     local Folder = Instance.new("Folder", PlayerMobs)
                     Folder.Name = Player.Name
@@ -172,9 +185,12 @@ function MosterModule.CreateMobs(Player, Field)
             --print(index)
 			if not Field.Pos1.Spawn.Value then -- ! Если false то ставим в первую
                 Mob:MoveTo(Field:FindFirstChild("Pos1").WorldPosition)
+                Mob.SpawnMobs.Value = "Pos1"
                 Field.Pos1.Spawn.Value = true
             elseif not Field.Pos2.Spawn.Value then
                 Mob:MoveTo(Field:FindFirstChild("Pos2").WorldPosition)
+                --CollisionMob(Mob)
+                Mob.SpawnMobs.Value = "Pos2"
                 Field.Pos2.Spawn.Value = true
             end
 
