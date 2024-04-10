@@ -15,7 +15,8 @@ function Data.new(Player)
 
 	PData.BaseFakeSettings = {
 		Attack = false,
-		objAttack = nil,
+		MonsterZone = false,
+		MobsField = "",
 		HiveOwner = "",
 		HiveNumberOwner = "",
 		OpenShopPlayer = false,

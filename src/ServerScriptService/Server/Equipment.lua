@@ -47,16 +47,35 @@ function EquipmentModule:LoadItems(Player, PData, Character)
         EquipmentModule:LoadItems(Player, PData, Character)
     end)
 end
-
+]]
 function EquipmentModule:StartSysmes()
-    Player.PlayerAdded:Connect(function(Player)
-        task.wait(2)
+
+    local PhysicsService = game:GetService("PhysicsService")
+    PhysicsService:RegisterCollisionGroup("Players")
+    PhysicsService:CollisionGroupSetCollidable("Players", "Players", false)
+    
+    local function Collision(Character)
+        for _, obj in next, Character:GetChildren() do
+            if obj:IsA("BasePart") then
+                obj.CollisionGroup = "Players"
+            end
+        end
+    end
+
+    game.Players.PlayerAdded:Connect(function(Player)
+        --task.wait(2)
+        if Player.Character then -- Если есть(доп проверка)
+            Collision(Player.Character)
+        end
+
+        Player.CharacterAdded:Connect(Collision)
+
         local Character = workspace:WaitForChild(Player.Name)
-        local PData = Data:Get(Player)
-        EquipmentModule:LoadItems(Player, PData, Character)
+        --local PData = Data:Get(Player)
+       -- EquipmentModule:LoadItems(Player, PData, Character)
     end)
 end
-
+--[[
 function EquipmentModule:EquipItemsGame(Character, TypeItem, PData)
     local Humanoid = Character:WaitForChild("Humanoid")
     --print(Character)

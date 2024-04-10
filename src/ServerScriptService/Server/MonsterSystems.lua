@@ -1,7 +1,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 local Remote = ReplicatedStorage:WaitForChild('Remote')
-
+local MobsSpawn = true
 local Zone = require(ReplicatedStorage.Zone)
 local Data = require(script.Parent.Data)
 local TableMosnter = require(ReplicatedStorage.Module.ItemsGame)
@@ -79,57 +79,65 @@ function MosterModule.GetRewards(Mob, Player, Field)
 end
 
 local function CollisionMob(Mob)
-    game:GetService("RunService").Stepped:connect(function()
-        if Mob then
-            print(Mob)
-            local head = Mob:FindFirstChild("Head")
-            local torso = Mob:FindFirstChild("UpperTorso")
-            if head then
-                    head.CanCollide = false 
-                if torso then
-                    print(torso)
-                    print(torso.CanCollide)
-                    torso.CanCollide = false
-                    print(torso.CanCollide)
-                end
-            end
+    for _, v in next, Mob:GetDescendants() do
+        if v:IsA('BasePart') then
+            v.CollisionGroup = "Players"
         end
-    end)         
-end
+    end
 
-function RotationToPlayer(Mob, Rotation, Player, Field)
-    task.spawn(function()
-        while Mob do
-            task.wait()
-            if Rotation then
-                if workspace:WaitForChild(Player.Name) then
-                    local Character = workspace:FindFirstChild(Player.Name)
-                    if Mob then
-                        Mob.Humanoid:MoveTo(Character.PrimaryPart.Position)
-                    else
-                       -- break
-                    end
-                else
-                end
-            end
-        end
-    end)
 end
 
 function MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack)
-    RotationToPlayer(Mob, Rotation, Player, Field)
+    
     --CollisionMob(Mob)
     local Character = game.Workspace:FindFirstChild(Player.Name)
     --local PositionObj = Mob:FindFirstChild("PositionObj")
     local Flowers = workspace.FieldsGame[Field.Name]:GetChildren() -- получаем цветы
-    local Flower = Flowers[math.random(1, #Flowers)]
     local PData = Data:Get(Player)
     --local EnemyHumanoid = Mob:FindFirstChild('EnemyHumanoid')
     local MaxSpeed = TableMosnter.Monster[Mob.Name].SettingsMobs.Speed
     --print(EnemyHumanoid)
-    --local Distance = (Mob.Body.Position - Character.PrimaryPart.Position).Magnitude
+    local Distance = (Mob.UpperTorso.Position - Character.PrimaryPart.Position).Magnitude
 
+    task.spawn(function()
+        while MobsSpawn do
+            task.wait()
+            if workspace:WaitForChild(Player.Name) then
+                local Character = workspace:FindFirstChild(Player.Name)
+                if Distance > 6 then
+                    repeat game:GetService('RunService').Heartbeat:Wait()
+                        Distance = (Mob.HumanoidRootPart.Position - Character.PrimaryPart.Position).Magnitude
+                        Mob.Humanoid:MoveTo(Character.PrimaryPart.Position)
+                    until Distance <= 6 or PData.BaseFakeSettings.MonsterZone == false
 
+                    Mob.Humanoid:MoveTo(Mob.HumanoidRootPart.Position)
+
+                    if Mob.SpawnMobs.Value == Field.Pos1.SpawnMobs1 then
+                        Mob.Humanoid:MoveTo(Field.Pos1.SpawnMobs1.Position)
+                        Distance = (Mob.HumanoidRootPart.Position - Field.Pos1.SpawnMobs1.Position).Magnitude
+                        
+                        if Distance <= 10 then
+                            MobsSpawn = false
+                            print('fff')
+                            Mob:Destroy()
+                        end
+
+                    elseif Mob.SpawnMobs.Value == Field.Pos2.SpawnMobs2 then -- тут баг 
+                        Mob.Humanoid:MoveTo(Field.Pos2.SpawnMobs2.Position)
+                        Distance = (Mob.HumanoidRootPart.Position - Field.Pos2.SpawnMobs2.Position).Magnitude
+                        print(Distance)
+
+                        if Distance <= 10 then
+                            MobsSpawn = false
+                            print('aaa')
+                            Mob:Destroy()
+                        end
+                    
+                    end
+                end
+            end
+        end
+    end)
 end
 
 
@@ -185,12 +193,11 @@ function MosterModule.CreateMobs(Player, Field)
             --print(index)
 			if not Field.Pos1.Spawn.Value then -- ! Если false то ставим в первую
                 Mob:MoveTo(Field:FindFirstChild("Pos1").WorldPosition)
-                Mob.SpawnMobs.Value = "Pos1"
+                Mob.SpawnMobs.Value = Field.Pos2.SpawnMobs2
                 Field.Pos1.Spawn.Value = true
             elseif not Field.Pos2.Spawn.Value then
                 Mob:MoveTo(Field:FindFirstChild("Pos2").WorldPosition)
-                --CollisionMob(Mob)
-                Mob.SpawnMobs.Value = "Pos2"
+                Mob.SpawnMobs.Value = Field.Pos1.SpawnMobs1
                 Field.Pos2.Spawn.Value = true
             end
 
@@ -219,10 +226,13 @@ function MosterModule:StartZone()
 
         Zone.playerEntered:Connect(function(Player) -- * Start
             local PData = Data:Get(Player)
-            if not PData.TimerTable[v.Name] then
+            if not PData.TimerTable[v.Name] and MobsSpawn then
+                PData.BaseFakeSettings.MonsterZone = true
+                PData.BaseFakeSettings.MobsField = v.Name
                 MosterModule.CreateMobs(Player, v)
             elseif PData.TimerTable[v.Name].Time then
                 if PData.TimerTable[v.Name].Time - os.time() <= 0 then
+                    PData.BaseFakeSettings.MonsterZone = true
                     MosterModule.CreateMobs(Player, v)
                 end
             end
@@ -231,26 +241,7 @@ function MosterModule:StartZone()
 
         Zone.playerExited:Connect(function(Player)
             local PData = Data:Get(Player)
-            PData.BaseFakeSettings.Attack = false
-            PData.BaseFakeSettings.Attack = nil
-
-            -- Сделать обновление для гуи
-            if #PlayerMobs:FindFirstChild(Player.Name):GetChildren() > 0 then
-                for i, indexMobs in next, PlayerMobs:FindFirstChild(Player.Name):GetChildren() do
-                    task.spawn(function()
-                        if indexMobs then
-                            --indexMobs:FindFirstChild('PositionObj'):Destroy()
-                            if indexMobs.PrimaryPart then
-                                indexMobs.PrimaryPart:FindFirstChild('BG').Enabled = false
-                                v.Pos1.Spawn.Value = false
-                                v.Pos2.Spawn.Value = false
-                            end
-                            task.wait(0.1)
-                            indexMobs:Destroy()
-                        end
-                    end)
-                end
-            end
+            PData.BaseFakeSettings.MonsterZone = false
         end)
     end
 end
