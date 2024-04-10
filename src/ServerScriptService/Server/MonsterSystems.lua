@@ -1,5 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
+local Workspace = game:GetService("Workspace")
 local Remote = ReplicatedStorage:WaitForChild('Remote')
 local MobsSpawn = true
 local Zone = require(ReplicatedStorage.Zone)
@@ -45,9 +46,12 @@ end
 
 function MosterModule.GetRewards(Mob, Player, Field)
     local PData = Data:Get(Player)
+
+    PData.TimerTable[Field] = {Time = TableMosnter.Monster[Mob.Name].Cooldown + os.time()} -- Ставим время
+
     local RewardNumber = 0
     local TokenRadios = 0
-    for i,v in pairs(TableMosnter.Monster['Ladibag'].Reward) do
+    for i,v in pairs(TableMosnter.Monster[Mob.Name].Reward) do
         RewardNumber += 1
         if i ~= "Battle Points" then
             local Chance = math.random(1,10000)
@@ -87,16 +91,9 @@ local function CollisionMob(Mob)
 
 end
 
-function MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack)
-    
-    --CollisionMob(Mob)
+function MosterModule.MobsAttack(Mob, Player, Field)
     local Character = game.Workspace:FindFirstChild(Player.Name)
-    --local PositionObj = Mob:FindFirstChild("PositionObj")
-    local Flowers = workspace.FieldsGame[Field.Name]:GetChildren() -- получаем цветы
     local PData = Data:Get(Player)
-    --local EnemyHumanoid = Mob:FindFirstChild('EnemyHumanoid')
-    local MaxSpeed = TableMosnter.Monster[Mob.Name].SettingsMobs.Speed
-    --print(EnemyHumanoid)
     local Distance = (Mob.UpperTorso.Position - Character.PrimaryPart.Position).Magnitude
 
     task.spawn(function()
@@ -106,38 +103,43 @@ function MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack)
                 local Character = workspace:FindFirstChild(Player.Name)
                 if Distance > 6 then
                     repeat game:GetService('RunService').Heartbeat:Wait()
-                        Distance = (Mob.HumanoidRootPart.Position - Character.PrimaryPart.Position).Magnitude
+                        Distance = (Mob:WaitForChild('HumanoidRootPart').Position - Character.PrimaryPart.Position).Magnitude
                         Mob.Humanoid:MoveTo(Character.PrimaryPart.Position)
                     until Distance <= 6 or PData.BaseFakeSettings.MonsterZone == false
 
                     Mob.Humanoid:MoveTo(Mob.HumanoidRootPart.Position)
 
-                    if Mob.SpawnMobs.Value == Field.Pos1.SpawnMobs1 then
-                        Mob.Humanoid:MoveTo(Field.Pos1.SpawnMobs1.Position)
-                        Distance = (Mob.HumanoidRootPart.Position - Field.Pos1.SpawnMobs1.Position).Magnitude
-                        
-                        if Distance <= 10 then
-                            MobsSpawn = false
-                            print('fff')
-                            Mob:Destroy()
-                        end
-
-                    elseif Mob.SpawnMobs.Value == Field.Pos2.SpawnMobs2 then -- тут баг 
-                        Mob.Humanoid:MoveTo(Field.Pos2.SpawnMobs2.Position)
-                        Distance = (Mob.HumanoidRootPart.Position - Field.Pos2.SpawnMobs2.Position).Magnitude
-                        print(Distance)
-
-                        if Distance <= 10 then
-                            MobsSpawn = false
-                            print('aaa')
-                            Mob:Destroy()
-                        end
+                    if Mob.SpawnMobs.Value ~= nil then
+                        Mob.Humanoid:MoveTo(Mob.SpawnMobs.Value.Position)
+                    end
                     
+                    Distance = (Mob.HumanoidRootPart.Position - Field.Pos1.SpawnMobs1.Position).Magnitude
+                    if Distance <= 10 then
+                        MobsSpawn = true
+                        Mob:Destroy()
+                        if Workspace.PlayerMobs ~= nil then
+                            for i, Index in next, Workspace.PlayerMobs:GetChildren() do
+                                Index:Destroy()
+                                Field.Pos2.Spawn.Value = false
+                                Field.Pos1.Spawn.Value = false
+                            end
+                        end
                     end
                 end
             end
+
+            if (Mob:WaitForChild('UpperTorso').Position - Player.Character.PrimaryPart.Position).Magnitude <= 5 then
+                task.wait(0.3)
+                Player.Character.Humanoid.Health -= TableMosnter.Monster[Mob.Name].SettingsMobs.Damage
+                Mob.Humanoid:MoveTo(Mob.SpawnMobs.Value.Position)
+                Field.Pos2.Spawn.Value = false
+                Field.Pos1.Spawn.Value = false
+            end
+
         end
     end)
+
+
 end
 
 
@@ -168,8 +170,6 @@ end
 function MosterModule.CreateMobs(Player, Field)
     task.spawn(function()
         local PData = Data:Get(Player)
-        local Rotation = true
-        local Attack = false
         for i, index in next, Field:GetChildren() do
 			if index.Name == "Pos1" or index.Name == "Pos2" then -- *Просмотр сколько штук есть
                 local Mob = ReplicatedStorage.Mobs:FindFirstChild(Field.Monster.Value):Clone()
@@ -211,7 +211,7 @@ function MosterModule.CreateMobs(Player, Field)
             BillboardGui.AlwaysOnTop = true
             BillboardGui.MaxDistance = TableMosnter.Monster[Mob.Name].SettingsMobs.Dist * 1.5
 
-            MosterModule.MobsAttack(Mob, Rotation, Player, Field, Attack) -- Аттака на игрока
+            MosterModule.MobsAttack(Mob, Player, Field) -- Аттака на игрока
 
             MosterModule.UpdateGui(Mob, Configuration, Player, Field) 
 

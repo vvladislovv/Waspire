@@ -136,7 +136,8 @@ ItemsGame.Monster = {
         SettingsMobs = {
             Speed = 15,
             Damage = 15,
-            Dist = 50
+            Dist = 50,
+            Cooldown = 300
         },
 
         Reward = {

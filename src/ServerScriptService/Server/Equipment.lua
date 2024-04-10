@@ -1,7 +1,7 @@
 -- Дописать скрипт баг парфель на бошке
 
 local EquipmentModule = {}
---[[
+
 local PhysicsService = game:GetService("PhysicsService")
 local Player = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -47,7 +47,7 @@ function EquipmentModule:LoadItems(Player, PData, Character)
         EquipmentModule:LoadItems(Player, PData, Character)
     end)
 end
-]]
+
 function EquipmentModule:StartSysmes()
 
     local PhysicsService = game:GetService("PhysicsService")
@@ -71,11 +71,12 @@ function EquipmentModule:StartSysmes()
         Player.CharacterAdded:Connect(Collision)
 
         local Character = workspace:WaitForChild(Player.Name)
-        --local PData = Data:Get(Player)
-       -- EquipmentModule:LoadItems(Player, PData, Character)
+        
+        local PData = Data:Get(Player)
+        EquipmentModule:LoadItems(Player, PData, Character)
     end)
 end
---[[
+
 function EquipmentModule:EquipItemsGame(Character, TypeItem, PData)
     local Humanoid = Character:WaitForChild("Humanoid")
     --print(Character)
@@ -150,6 +151,6 @@ function EquipmentModule:EquipItemsGame(Character, TypeItem, PData)
            end
         end
     end
-end]]
+end
 
 return EquipmentModule

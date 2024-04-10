@@ -152,12 +152,10 @@ end
 
 function CheckButton(Player, AllHive) -- переписать на склиент
     task.spawn(function()
+        print(AllHive)
         while true do
             task.wait()
-            --print(Player)
-            --print(Player.Character.UpperTorso)
-            --print(IndexPlatform.Owner.Value)
-            
+
             if AllHive.Hive1.Owner.Value ~= "" then
                 Player.Character.UpperTorso.Beam1.Enabled = false
                 AllHive.Hive1.Highlight.Enabled = true
@@ -260,7 +258,7 @@ function CheckButton(Player, AllHive) -- переписать на склиен�
 end
 Remote.HiveButtonCheck.OnServerEvent:Connect(ButtonServerCheckPlayer)
 Remote.HiveSpawnSlot.OnServerEvent:Connect(HiveAndSlot)
---Remote.HiveOwner.OnServerEvent:Connect(CheckButton)
+Remote.HiveOwner.OnServerEvent:Connect(CheckButton)
 Remote.HiveSettings.OnServerEvent:Connect(HiveSettingsBasic)
 
 return HiveServer

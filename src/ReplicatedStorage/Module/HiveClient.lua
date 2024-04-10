@@ -130,7 +130,7 @@ function NewHive(IndexHive) -- Взаимодействие с кнопкой
         end
     end)
 end
---BeanCheckGame(Player.Character, HiveFolder)
+BeanCheckGame(Player.Character, HiveFolder)
 for _, IndexHive in next, HiveFolder:GetChildren() do
 
     task.spawn(function()
@@ -140,8 +140,6 @@ for _, IndexHive in next, HiveFolder:GetChildren() do
             ButtonDistation(Distation, IndexHive.Platform.Up.Indecator.Button, IndexHive)
         end
     end)
-
-    --Remote.HiveOwner:FireServer(IndexPlatform) -- для кнопки
 end
 
 return HiveCleint
